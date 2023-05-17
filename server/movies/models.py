@@ -8,9 +8,9 @@ class Genre(models.Model):
 class Actor(models.Model):
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=30)
-    birthday = models.DateField()
-    deathday = models.DateField()
-    profile_path = models.TextField()
+    birthday = models.DateField(null=True)
+    deathday = models.DateField(null=True)
+    profile_path = models.TextField(null=True)
 
 class Movie(models.Model):
     id = models.BigIntegerField(primary_key=True)
