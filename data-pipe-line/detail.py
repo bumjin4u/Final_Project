@@ -38,7 +38,8 @@ headers = {
 }
 movie_data = []
 actor_ids = set()
-
+cnt = 0
+N = len(ids)
 for movie_id in ids:
     actors = []
     movie = requests.get(getDetailURL(movie_id), headers=headers).json()
@@ -46,6 +47,10 @@ for movie_id in ids:
     newMovie["pk"] = movie_id
     fields = {}
     fields["title"] = movie["title"]
+    fields["original_title"] = movie["original_title"]
+    fields['adult'] = movie["adult"]
+    if fields['adult']:
+        print("True 나옴")
     fields["overview"] = movie["overview"]
     fields["genres"] = [ genre["id"] for genre in movie["genres"]]
     fields["tagline"] = movie["tagline"]
@@ -58,14 +63,16 @@ for movie_id in ids:
     fields["vote_count"] = movie["vote_count"]
 
     actor_reponse = requests.get(getCreditURL(movie_id), headers=headers).json().get("cast")
-    actors = [ actor["id"] for actor in actor_reponse ]
+    actors = [ actor["id"] for actor in actor_reponse if actor["profile_path"] ]
     fields["actors"] = actors
     
     newMovie["fields"] = fields
     movie_data.append(newMovie)
     actor_ids.update(actors)
-    time.sleep(1)
+    cnt += 1
+    print(f"{cnt}/{N}")
 
+print(len(actor_ids))
 movies_file_path = './data/movies.json'
 with open(movies_file_path, 'w') as f:
     json.dump(movie_data, f, indent=4)

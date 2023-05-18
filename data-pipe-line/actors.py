@@ -1,19 +1,7 @@
-# [
-#     {
-#         "model": "movies.actor",
-#         "pk": 1,
-#         "fields": {
-#             "name": "Case imagine simple shake ahead try."
-#         }
-#     },
-# ]
-
 import requests
 import json
 import pickle
-from googletrans import Translator
-
-translator = Translator()
+import langid
 
 with open('./data/actor_ids.p','rb') as f:
     actor_ids = pickle.load(f)
@@ -28,9 +16,9 @@ headers = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWNmYWRjNTI2NjkwNzcxNDQ1YzU4YWY1NWVjMWU3ZCIsInN1YiI6IjYzZDMxODA2ZTcyZmU4MDBlOWU2YTU1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QX0Tk_RtXEBQcwdsCVO__ZPTgJGmOBjTRlf2yPdXDUU"
 }
 
-print(len(actor_ids))
 actors = []
 cnt = 0
+N = len(actor_ids)
 for actor_id in actor_ids:
     actor = requests.get(getURL(actor_id), headers=headers).json()
     newActor = {"model":"movies.actor"}
@@ -38,7 +26,7 @@ for actor_id in actor_ids:
     fields = {}
     fields["name"] = actor["name"]
     for aka in actor["also_known_as"]:
-        if translator.detect(aka) == "ko":
+        if langid.classify(aka)[0] == 'ko':
             fields["name"]  = aka
             break
     fields["birthday"] = actor["birthday"]
@@ -49,8 +37,8 @@ for actor_id in actor_ids:
 
     actors.append(newActor)
     cnt += 1
-    if cnt == 40:
-        break
+    print(f"{cnt}/{N}")
+    
 file_path = './data/actors.json'
 with open(file_path,'w') as f:
     json.dump(actors, f, indent=4)

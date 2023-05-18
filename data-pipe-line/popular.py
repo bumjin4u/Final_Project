@@ -11,14 +11,14 @@ headers = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWNmYWRjNTI2NjkwNzcxNDQ1YzU4YWY1NWVjMWU3ZCIsInN1YiI6IjYzZDMxODA2ZTcyZmU4MDBlOWU2YTU1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QX0Tk_RtXEBQcwdsCVO__ZPTgJGmOBjTRlf2yPdXDUU"
 }
 ## 페이지 설정 (가져올 영화 수 = page x 20)
-pages = 1
+pages = 50
 data = []
 for page in range(1,pages+1):
     movies = requests.get(getURL(page), headers=headers).json().get('results')
 
     for movie in movies:
         data.append(movie['id'])
-
+    print(f"{page}/{pages}")
     time.sleep(1)
 
 file_path = './data/popular_movie_ids.p'
