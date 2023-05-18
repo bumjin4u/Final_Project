@@ -1,12 +1,32 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link :to="{ name: 'ArticleView'}">게시물</router-link> |
+      <router-link :to="{ name: 'SignUpView'}">회원가입</router-link> |
+      
+      <router-link :to="{ name: 'LoginView'}">로그인</router-link> |
+      <a @click="logout">로그아웃</a>
     </nav>
     <router-view/>
   </div>
 </template>
+
+
+<script>
+export default {
+  name: 'App',
+  computed: {
+    islogin: function() {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>
 
 <style>
 #app {
