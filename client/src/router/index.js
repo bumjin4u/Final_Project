@@ -5,6 +5,7 @@ import ArticleDetailView from '@/views/ArticleDetailView'
 import ArticleCreateView from '@/views/ArticleCreateView'
 import SignUpView from '@/views/SignUpView'
 import LoginView from '@/views/LoginView'
+import SearchView from '@/views/SearchView'
 
 
 Vue.use(VueRouter)
@@ -34,6 +35,11 @@ const routes = [
     path: '/login',
     name: 'LoginView',
     component: LoginView
+  },
+  {
+    path: '/search',
+    name: 'SearchView',
+    component: SearchView
   },
 
 ]

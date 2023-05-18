@@ -81,6 +81,9 @@ export default new Vuex.Store({
     logout(context) {
       context.commit('DELETE_TOKEN')
       alert('로그아웃 됐습니다!')
+    },
+    search(context, payload) {
+      console.log(payload)
     }
   },
   modules: {
