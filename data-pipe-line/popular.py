@@ -19,7 +19,6 @@ for page in range(1,pages+1):
     for movie in movies:
         data.append(movie['id'])
     print(f"{page}/{pages}")
-    time.sleep(1)
 
 file_path = './data/popular_movie_ids.p'
 with open(file_path, 'wb') as f:

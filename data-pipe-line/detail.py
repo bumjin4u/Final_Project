@@ -19,7 +19,6 @@
 import requests
 import pickle
 import json
-import time
 
 with open('./data/popular_movie_ids.p','rb') as f:
     ids = pickle.load(f)
@@ -73,6 +72,7 @@ for movie_id in ids:
     print(f"{cnt}/{N}")
 
 print(len(actor_ids))
+
 movies_file_path = './data/movies.json'
 with open(movies_file_path, 'w') as f:
     json.dump(movie_data, f, indent=4)
