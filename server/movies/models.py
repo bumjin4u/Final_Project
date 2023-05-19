@@ -14,14 +14,16 @@ class Actor(models.Model):
 
 class Movie(models.Model):
     id = models.BigIntegerField(primary_key=True)
+    adult = models.BooleanField()
     title = models.CharField(max_length=30)
+    original_title = models.CharField(max_length=30, null=True)
     overview = models.TextField()
     genres = models.ManyToManyField(Genre, related_name='movies')
     tagline = models.TextField() # 영화 소개
     runtime = models.IntegerField()
     release_date = models.DateField()
-    backdrop_path = models.TextField()
-    poster_path = models.TextField()
+    backdrop_path = models.TextField(null=True)
+    poster_path = models.TextField(null=True)
     status = models.CharField(max_length=20)
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
