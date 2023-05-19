@@ -2,8 +2,8 @@
 
 <template>
   <div>
-    <h1>게시글 작성</h1>
-    <form @submit.prevent="createArticle">
+    <h1>댓글 작성</h1>
+    <form @submit.prevent="createComment">
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title"><br>
       <label for="content">내용 : </label>
@@ -18,7 +18,7 @@ import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
-  name: 'ArticleCreateView',
+  name: 'CommentCreate',
   data() {
     return {
       title: null,
@@ -31,7 +31,7 @@ export default {
     }
   },
   methods: {
-    createArticle() {
+    createComment() {
       const title = this.title
       const content = this.content
       const Token = this.Token

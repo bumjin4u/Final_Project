@@ -46,6 +46,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
         console.log(err)
+        console.log('에러')
       })
     },
     signup(context, payload) {
@@ -82,9 +83,6 @@ export default new Vuex.Store({
       context.commit('DELETE_TOKEN')
       alert('로그아웃 됐습니다!')
     },
-    search(context, payload) {
-      console.log(payload)
-    }
   },
   modules: {
   }

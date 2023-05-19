@@ -6,15 +6,23 @@
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
+
+    <CommentList />
   </div>
 </template>
 
+
 <script>
 import axios from 'axios'
+import CommentList from '@/components/CommentList.vue'
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'DetailView',
+  components: {
+    CommentList
+  },
   data() {
     return {
       article: null

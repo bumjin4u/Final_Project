@@ -1,16 +1,11 @@
 from django.db import models
+from actors.models import Actor
 
 # Create your models here.
+
 class Genre(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=10)
-    
-class Actor(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=30)
-    birthday = models.DateField(null=True)
-    deathday = models.DateField(null=True)
-    profile_path = models.TextField(null=True)
 
 class Movie(models.Model):
     id = models.BigIntegerField(primary_key=True)

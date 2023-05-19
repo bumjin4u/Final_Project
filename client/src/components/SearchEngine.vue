@@ -10,7 +10,7 @@
 
       <div v-else>
         <label for="movie">영화 : </label>
-        <input type="password" id="movie" v-model="movie"><br>
+        <input type="text" id="movie" v-model="movie"><br>
 
         <input type="submit" value="submit">
       </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'SearchEngine',
   props: {
@@ -35,15 +37,31 @@ export default {
     search() {
       if (this.actor != null) {
         const actor = this.actor
-        const url = 'actor'
-        const payload = { url, actor }
-        this.$store.dispatch('search', payload)
+        axios({
+          url : `http://127.0.0.1:8000/movies/search/actor/${actor}/`,
+          method : 'get'
+        })
+          .then((response)=>{
+            console.log(response.data)
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+        this.actor = null
       }
       else {
         const movie = this.movie
-        const url = 'movie'
-        const payload = { url, movie }
-        this.$store.dispatch('search', payload)
+        axios({
+          url : `http://127.0.0.1:8000/movies/search/movie/${movie}/`,
+          method : 'get'
+        })
+          .then((response)=>{
+            console.log(response.data)
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+        this.movie = null
       }
     }
   }

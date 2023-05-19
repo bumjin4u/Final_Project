@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 class ArticleListSerializer(serializers.ModelSerializer):
 
-    username = serializers.CharField(wource='user.username', read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Article

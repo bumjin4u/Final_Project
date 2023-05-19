@@ -12,17 +12,17 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/article',
+    path: '/articles',
     name: 'ArticleView',
     component: ArticleView
   },
   {
-    path: '/article/:id',
+    path: '/articles/:id',
     name: 'ArticleDetailView',
     component: ArticleDetailView,
   },
   {
-    path: '/article/create',
+    path: '/articles/create',
     name: 'ArticleCreateView',
     component: ArticleCreateView
   },
