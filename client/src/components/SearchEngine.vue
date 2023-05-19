@@ -38,7 +38,7 @@ export default {
       if (this.actor != null) {
         const actor = this.actor
         axios({
-          url : `http://127.0.0.1:8000/movies/search/actor/${actor}/`,
+          url : `http://127.0.0.1:8000/actors/search/actor/${actor}/`,
           method : 'get'
         })
           .then((response)=>{
