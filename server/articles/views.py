@@ -65,7 +65,7 @@ def comment_list(request, article_pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['DELETE', 'PUT'])
-def comment_detail(request, comment_pk):
+def comment_update(request, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     # comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'DELETE':

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Article, Comment
-from ..movies.models import Movie
+from movies.models import Movie
 from django.contrib.auth import get_user_model
 
 
