@@ -2,9 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.article_list),
-    path('<int:article_pk>/', views.article_detail),
-    path('comments/', views.comment_list),
-    path('comments/<int:comment_pk>/', views.comment_detail),
-    path('articles/<int:article_pk>/comments/', views.comment_create),
+    path('', views.article_list), # articles 조회, 생성
+    path('<int:article_pk>/', views.article_detail), # article 조회, 수정, 삭제
+    path('<int:article_pk>/comments/', views.comment_list), # comments 조회, 생성
+    path('comments/<int:comment_id>/', views.comment_update), # comment 수정, 삭제
 ]
