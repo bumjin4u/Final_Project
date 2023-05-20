@@ -12,10 +12,10 @@
         <label for="movie">영화 : </label>
         <input type="text" id="movie" v-model="movie"><br>
 
-        <input type="submit" value="submit">
+        <input type="submit" value="submit" @submit="ChildToParent">
       </div>
-
     </form>
+     
   </div>
 </template>
 
@@ -31,6 +31,7 @@ export default {
     return {
       actor: null,
       movie: null,
+      data: null
     }
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
         })
           .then((response)=>{
             console.log(response.data)
+            this.data = response.data
           })
           .catch((error)=>{
             console.log(error)
@@ -57,12 +59,26 @@ export default {
         })
           .then((response)=>{
             console.log(response.data)
+            this.data = response.data
           })
           .catch((error)=>{
             console.log(error)
           })
         this.movie = null
       }
+    },
+    ChildToParent: function() {    
+      const data = this.data
+      if (this.actor != null) {
+        this.$emit('child-to-parent', data)
+        console.log(data)
+        // this.data = null
+      }
+      else {
+        this.$emit('child-to-parent', data)
+        console.log(data)
+        // this.data = null
+      }  
     }
   }
 }

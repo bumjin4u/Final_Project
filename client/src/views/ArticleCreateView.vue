@@ -8,6 +8,9 @@
       <input type="text" id="title" v-model.trim="title"><br>
       <label for="content">내용 : </label>
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
+      <SearchEngine
+      @child-to-parent="parentGetEvent"
+      />
       <input type="submit" id="submit">
     </form>
   </div>
@@ -15,14 +18,19 @@
 
 <script>
 import axios from 'axios'
+import SearchEngine from '@/components/SearchEngine.vue'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'ArticleCreateView',
+  components: {
+    SearchEngine,
+  },
   data() {
     return {
       title: null,
       content: null,
+      movie: null,
     }
   },
   computed: {
@@ -34,7 +42,9 @@ export default {
     createArticle() {
       const title = this.title
       const content = this.content
+      const movie = this.movie
       const Token = this.Token
+      
 
       if (!title) {
         alert('제목 입력해주세요')
@@ -46,7 +56,7 @@ export default {
       axios({
         method: 'post',
         url: `${API_URL}/articles/`,
-        data: { title, content },
+        data: { title, content, movie },
         headers: {
           Authorization: `Token ${Token}`
         },
@@ -58,6 +68,10 @@ export default {
       .catch((err) => {
         console.log(err)
       })
+    },
+    parentGetEvent: function(inputData) {
+      this.movie = inputData[0]['id']
+      // console.log(inputData[0]['id'])
     }
   }
 }

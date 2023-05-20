@@ -7,10 +7,12 @@ from django.contrib.auth import get_user_model
 class ArticleListSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='user.username', read_only=True)
+    like_count = serializers.IntegerField(source='like_users.count', read_only=True)
 
     class Meta:
         model = Article
-        fields = ('id', 'title')
+        fields = ('id', 'title', 'username', 'like_count',)
+        
 
 class CommentSerializer(serializers.ModelSerializer):
 
@@ -21,13 +23,11 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer): # POST
-    comment_set = CommentSerializer(many=True, read_only=True)
-    comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
 
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user', 'like_users')
 
 class ArticleDetailSerializer(serializers.ModelSerializer): # GET
     class MovieSerializer(serializers.ModelSerializer):
@@ -38,14 +38,15 @@ class ArticleDetailSerializer(serializers.ModelSerializer): # GET
     movie = MovieSerializer(read_only=True)
     class Meta:
         model = Article
-        fields = ('user','title','content','create_at','updated_at',)
-        read_only_fields = ('user',)
+        fields = ('user','title','content','created_at','updated_at', 'movie')
+        read_only_fields = ('user', 'movie')
+
 
 class ArticleUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user', 'like_users')
 
 
 
