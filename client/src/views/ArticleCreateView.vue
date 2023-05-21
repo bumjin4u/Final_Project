@@ -44,7 +44,6 @@ export default {
       const content = this.content
       const movie = this.movie
       const Token = this.Token
-      
 
       if (!title) {
         alert('제목 입력해주세요')
@@ -71,7 +70,7 @@ export default {
     },
     parentGetEvent: function(inputData) {
       this.movie = inputData[0]['id']
-      // console.log(inputData[0]['id'])
+      // console.log(inputData)
     }
   }
 }
