@@ -11,6 +11,8 @@
     <br>
 
     <button @click="updateArticleDetail">수정</button>
+    <br>
+    <button @click="deleteArticleDetail">삭제</button>
 
     <CommentList />
   </div>
@@ -50,14 +52,15 @@ export default {
         url: `${API_URL}/articles/${ this.$route.params.id }/`,
       })
       .then((res) => {
-        console.log(res)
         this.article = res.data
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
     },
     updateArticleDetail() {
+      const article = this.article
       const title = this.title
       const content = this.content
       const movie = this.movie
@@ -65,15 +68,31 @@ export default {
 
       axios({
         method: 'put',
-        url: `${API_URL}/articles/${ this.$route.params.id }/`,
+        url: `${API_URL}/articles/${ article.id }/`,
         data: { title, content, movie },
         headers: {
           Authorization: `Token ${Token}`
         },
       })
-      .then((res) => {
-        console.log(res)
-        this.article = res.data
+      .then(() => {
+        this.$router.push({ name: 'ArticleView' })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    deleteArticleDetail() {
+      const Token = this.Token
+      const article = this.article
+      axios({
+        method: 'delete',
+        url: `${API_URL}/articles/${ article.id }/`,
+        headers: {
+          Authorization: `Token ${Token}`
+        },
+      })
+      .then(() => {
+        this.$router.push({ name: 'ArticleView' })
       })
       .catch((err) => {
         console.log(err)

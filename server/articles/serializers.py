@@ -38,7 +38,7 @@ class ArticleDetailSerializer(serializers.ModelSerializer): # GET
     movie = MovieSerializer(read_only=True)
     class Meta:
         model = Article
-        fields = ('user','title','content','created_at','updated_at', 'movie')
+        fields = ('id', 'user','title','content','created_at','updated_at', 'movie')
         read_only_fields = ('user', 'movie')
 
 
