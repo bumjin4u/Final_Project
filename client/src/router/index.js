@@ -9,7 +9,7 @@ import SearchView from '@/views/SearchView'
 import MovieView from '@/views/MovieView'
 import MovieDetailView from '@/views/MovieDetailView'
 import ActorView from '@/views/ActorView'
-
+import ActorDetailView from '@/views/ActorDetailView'
 
 Vue.use(VueRouter)
 
@@ -50,7 +50,7 @@ const routes = [
     component: MovieView
   },
   {
-    path: '/movies/detail/:movie_id',
+    path: '/movies/:movie_id',
     name: 'MovieDetailView',
     component: MovieDetailView
   },
@@ -58,6 +58,11 @@ const routes = [
     path: '/actors',
     name: 'ActorView',
     component: ActorView
+  },
+  {
+    path: '/actors/:actor_id',
+    name: 'ActorDetailView',
+    component: ActorDetailView
   },
 ]
 

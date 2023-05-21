@@ -1,5 +1,5 @@
 <template>
-  <div @click="goToDetail(movie.id)">
+  <div @click="goToDetail">
     <!-- 카드로 바꿀 것 -->
     <p>id : {{movie.id}}</p>
     <p>title : {{movie.title}}</p>
@@ -16,7 +16,7 @@ export default {
   },
   methods : {
     goToDetail : function(){
-      this.$router.push(`/movies/detail/${this.movie.id}`)
+      this.$router.push(`/movies/${this.movie.id}`)
     }
   }
 }
