@@ -1,0 +1,27 @@
+<template>
+  <div @click="goToDetail(movie.id)">
+    <!-- 카드로 바꿀 것 -->
+    <p>id : {{movie.id}}</p>
+    <p>title : {{movie.title}}</p>
+    <p>original_title : {{movie.original_title}}</p>
+    <p>poster_path : {{movie.poster_path}}</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name : "MovieItem",
+  props : {
+    movie : Object
+  },
+  methods : {
+    goToDetail : function(){
+      this.$router.push(`/movies/detail/${this.movie.id}`)
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>

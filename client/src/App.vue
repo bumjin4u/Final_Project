@@ -1,12 +1,13 @@
 <template>
   <div id="app">
     <nav>
+      <router-link :to="{ name: 'MovieView'}">영화</router-link> |
+      <router-link :to="{ name: 'ActorView'}">배우</router-link> |
       <router-link :to="{ name: 'ArticleView'}">게시물</router-link> |
-      <router-link :to="{ name: 'SignUpView'}">회원가입</router-link> |
-      
-      <router-link :to="{ name: 'LoginView'}">로그인</router-link> |
       <router-link :to="{ name: 'SearchView'}">검색</router-link> |
-      <a @click="logout">로그아웃</a>
+      <router-link v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입 |</router-link>
+      <router-link v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
+      <a v-if="isLogin" @click="logout">로그아웃</a>
     </nav>
     <router-view/>
   </div>
@@ -17,7 +18,7 @@
 export default {
   name: 'App',
   computed: {
-    islogin: function() {
+    isLogin: function() {
       return this.$store.getters.isLogin
     }
   },
