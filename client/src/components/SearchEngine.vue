@@ -24,13 +24,17 @@ export default {
   },
   data() {
     return {
-      actor: ' ',
-      movie: ' ',
+      actor: '',
+      movie: '',
       data: null,
     }
   },
   methods: {
     searchActor() {
+      if (!this.actor){
+        alert("입력 후 검색해주세요.")
+        return
+      }
       axios({
         url : `http://127.0.0.1:8000/actors/search/actor/${this.actor}/`,
         method : 'GET'
@@ -44,6 +48,10 @@ export default {
         })
     },
     searchMovie(){
+      if (!this.movie){
+        alert("입력 후 검색해주세요.")
+        return
+      }
       axios({
           url : `http://127.0.0.1:8000/movies/search/movie/${this.movie}/`,
           method : 'GET'
