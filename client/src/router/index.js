@@ -10,6 +10,7 @@ import MovieView from '@/views/MovieView'
 import MovieDetailView from '@/views/MovieDetailView'
 import ActorView from '@/views/ActorView'
 import ActorDetailView from '@/views/ActorDetailView'
+import ProfileView from '@/views/ProfileView'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/actors/:actor_id',
     name: 'ActorDetailView',
     component: ActorDetailView
+  },
+  {
+    path: '/profile/',
+    name: 'ProfileView',
+    component: ProfileView
   },
 ]
 

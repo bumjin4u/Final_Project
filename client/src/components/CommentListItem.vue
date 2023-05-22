@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h5>{{ comment.id }}</h5>
-    <p>{{ comment.title }}</p>
+    <p>{{ comment.content }}</p>
     <hr>
   </div>
 </template>

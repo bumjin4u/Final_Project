@@ -4,10 +4,8 @@
   <div>
     <h1>댓글 작성</h1>
     <form @submit.prevent="createComment">
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
-      <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
+      <label>내용 : </label>
+      <textarea cols="30" rows="10" v-model="content"></textarea><br>
       <input type="submit" id="submit">
     </form>
   </div>
@@ -19,9 +17,11 @@ const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'CommentCreate',
+  props: {
+    article: Number
+  },
   data() {
     return {
-      title: null,
       content: null,
     }
   },
@@ -32,28 +32,25 @@ export default {
   },
   methods: {
     createComment() {
-      const title = this.title
       const content = this.content
       const Token = this.Token
+      const article = this.article
+      // console.log(article)
 
-      if (!title) {
-        alert('제목 입력해주세요')
-        return
-      } else if (!content){
-        alert('내용 입력해주세요')
-        return
+      if (!content) {
+      alert('내용 입력해주세요')
+      return
       }
       axios({
         method: 'post',
-        url: `${API_URL}/articles/`,
-        data: { title, content },
+        url: `${API_URL}/articles/${ article }/comments/`,
+        data: { content },
         headers: {
           Authorization: `Token ${Token}`
         },
       })
       .then(() => {
-        // console.log(res)
-        this.$router.push({name: 'ArticleView'})
+        this.$emit('getComments')
       })
       .catch((err) => {
         console.log(err)

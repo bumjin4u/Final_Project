@@ -16,7 +16,8 @@ export default new Vuex.Store({
   state: {
     articles: [
     ],
-    Token : null
+    Token : null,
+    Username : null
   },
   getters: {
     isLogin(state) {
@@ -32,6 +33,12 @@ export default new Vuex.Store({
     },
     DELETE_TOKEN(state) {
       state.Token = null
+    },
+    SAVE_USERNAME(state, Username) {
+      state.Username = Username
+    },
+    DELETE_USERNAME(state) {
+      state.Username = null
     }
   },
   actions: {
@@ -72,6 +79,10 @@ export default new Vuex.Store({
       })
        .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
+        const account = JSON.parse(res.config.data)
+        context.commit('SAVE_USERNAME', account.username)
+        console.log(res)
+
         router.push({ name: 'ArticleView' })
         
        })
@@ -81,6 +92,7 @@ export default new Vuex.Store({
     },
     logout(context) {
       context.commit('DELETE_TOKEN')
+      context.commit('DELETE_USERNAME')
       alert('로그아웃 됐습니다!')
     },
   },

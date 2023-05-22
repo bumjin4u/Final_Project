@@ -6,35 +6,44 @@
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
-    <p>영화 : {{ article?.movie.id }}</p>
-    <img v-if="article" :src="'https://image.tmdb.org/t/p/original'+article.movie.poster_path" alt="" width="300" height="400">
+
+    <MovieItem 
+    v-if="article"
+    :movie="article.movie"
+    />
     <br>
 
-    <button @click="updateArticleDetail">수정</button>
-    <br>
+    <!-- <button @click="updateArticleDetail">수정</button>
+    <br> -->
     <button @click="deleteArticleDetail">삭제</button>
 
-    <CommentList />
+    <CommentList 
+    :article="article_id"
+    />
+
+    <!--  -->
   </div>
 </template>
 
 
 <script>
 import axios from 'axios'
+import MovieItem from '@/components/MovieItem.vue'
 import CommentList from '@/components/CommentList.vue'
+
 
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'DetailView',
   components: {
-    CommentList
+    MovieItem,
+    CommentList,
   },
   data() {
     return {
       article: null,
-      updateMode: false
-
+      article_id : Number(this.$route.params.id),
     }
   },
   created() {
@@ -47,9 +56,11 @@ export default {
   },
   methods: {
     getArticleDetail() {
+      const article = this.article_id
+      // console.log(article)
       axios({
         method: 'get',
-        url: `${API_URL}/articles/${ this.$route.params.id }/`,
+        url: `${API_URL}/articles/${ article }/`,
       })
       .then((res) => {
         this.article = res.data
@@ -57,36 +68,38 @@ export default {
       })
       .catch((err) => {
         console.log(err)
+        console.log('에러')
       })
     },
-    updateArticleDetail() {
-      const article = this.article
-      const title = this.title
-      const content = this.content
-      const movie = this.movie
-      const Token = this.Token
+    // updateArticleDetail() {
+    //   const article = this.article
+    //   const title = this.title
+    //   const content = this.content
+    //   const movie = this.movie
+    //   const Token = this.Token
 
-      axios({
-        method: 'put',
-        url: `${API_URL}/articles/${ article.id }/`,
-        data: { title, content, movie },
-        headers: {
-          Authorization: `Token ${Token}`
-        },
-      })
-      .then(() => {
-        this.$router.push({ name: 'ArticleView' })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    },
+    //   axios({
+    //     method: 'put',
+    //     url: `${API_URL}/articles/${ article.id }/`,
+    //     data: { title, content, movie },
+    //     headers: {
+    //       Authorization: `Token ${Token}`
+    //     },
+    //   })
+    //   .then(() => {
+    //     this.$router.push({ name: 'ArticleView' })
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    // },
     deleteArticleDetail() {
       const Token = this.Token
-      const article = this.article
+      const article = this.article_id
+
       axios({
         method: 'delete',
-        url: `${API_URL}/articles/${ article.id }/`,
+        url: `${API_URL}/articles/${ article }/`,
         headers: {
           Authorization: `Token ${Token}`
         },
