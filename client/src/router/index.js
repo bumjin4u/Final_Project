@@ -12,6 +12,7 @@ import ActorView from '@/views/ActorView'
 import ActorDetailView from '@/views/ActorDetailView'
 import ProfileView from '@/views/ProfileView'
 import ArticleUpdateView from '@/views/ArticleUpdateView'
+import PasswordChangeView from '@/views/PasswordChangeView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -74,6 +75,11 @@ const routes = [
     path: '/articles/:article_id/update',
     name: 'ArticleUpdateView',
     component: ArticleUpdateView
+  },
+  {
+    path: '/profile/passwordchange',
+    name: 'PasswordChangeView',
+    component: PasswordChangeView
   },
 ]
 

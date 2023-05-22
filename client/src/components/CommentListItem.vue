@@ -3,7 +3,7 @@
     <div v-if="!updateMode">
       <p>{{ content }}</p>
       <button v-if="flag" @click="deleteCommentItem">삭제</button>
-      <button @click="changeMode">수정</button>
+      <button v-if="flag" @click="changeMode">수정</button>
     </div>
     <div v-else>
       <input type="text" v-model="content">

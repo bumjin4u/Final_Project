@@ -45,6 +45,8 @@ export default new Vuex.Store({
       })
        .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
+        const account = JSON.parse(res.config.data)
+        context.commit('SAVE_USERNAME', account.username)
         router.push({ name: 'ArticleView' })
         
        })

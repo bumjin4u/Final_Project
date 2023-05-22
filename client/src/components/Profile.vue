@@ -6,6 +6,13 @@
     <p>작성한 게시물 : {{ profile?.articles }}</p>
     <p>작성한 댓글 : {{ profile?.comments }}</p>
     <p>좋아요 누른 댓글 : {{ profile?.like_articles }}</p>
+    <a @click="passwordChange">비밀번호변경</a>
+    <div v-if="flag">
+      <button @click="Follow">팔로우 해제</button>
+    </div>
+    <div v-else>
+      <button @click="Follow">팔로우</button>
+    </div>
   </div>
 </template>
 
@@ -17,7 +24,8 @@ export default {
   name: "ProFile",
   data() {
     return {
-      profile: null
+      profile: null,
+      flag : false
     }
   },
   computed: {
@@ -29,7 +37,8 @@ export default {
     },
   },
   created() {
-    this.getProfile()
+    this.getProfile(),
+    this.checkUser()
   },
   methods: {
     getProfile() {
@@ -47,6 +56,46 @@ export default {
       .catch((err) => {
         console.log(err)
       })
+    },
+    Follow() {
+      const Token = this.Token
+      const userId = this.profile.id
+
+      axios({
+        method: 'put',
+        url: `${API_URL}/user/${ userId }/follow/`,
+        headers: {
+          Authorization: `Token ${Token}`
+        },
+      })
+      .then(() => {
+        this.getArticleDetail(),
+        this.checkUser()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    checkUser() {
+      const username = this.$store.state.Username
+      if (!username ){
+        return 
+      }
+      axios({
+        method : "GET",
+        url : `${API_URL}/user/${username}/`,
+        headers : {
+          Authorization : `Token ${this.Token}`
+        }
+      })
+      .then((response)=>{
+        this.flag = response.data.like_articles.some((like_article)=>{
+          return like_article.id===this.article_id
+        })
+      })
+    },
+    passwordChange() {
+      this.$router.push({name: 'PasswordChangeView'})
     }
   }
 }
