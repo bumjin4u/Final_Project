@@ -11,7 +11,7 @@ import MovieDetailView from '@/views/MovieDetailView'
 import ActorView from '@/views/ActorView'
 import ActorDetailView from '@/views/ActorDetailView'
 import ProfileView from '@/views/ProfileView'
-
+import ArticleUpdateView from '@/views/ArticleUpdateView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -69,6 +69,11 @@ const routes = [
     path: '/profile/',
     name: 'ProfileView',
     component: ProfileView
+  },
+  {
+    path: '/articles/:article_id/update',
+    name: 'ArticleUpdateView',
+    component: ArticleUpdateView
   },
 ]
 

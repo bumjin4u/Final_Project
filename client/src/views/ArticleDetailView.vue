@@ -7,15 +7,15 @@
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
     <p>추천수 : {{ article?.like_count }}</p>
-
+     
     <MovieItem 
     v-if="article"
     :movie="article.movie"
     />
     <br>
 
-    <!-- <button @click="updateArticleDetail">수정</button>
-    <br> -->
+    <button @click="goToArticleUpdate">수정</button>
+    <br>
     <button @click="deleteArticleDetail">삭제</button>
     
 
@@ -57,8 +57,7 @@ export default {
   },
   created() {
     this.getArticleDetail(),
-    this.checkUser(),
-    console.log(this.article)
+    this.checkUser()
   },
   computed: {
     Token() {
@@ -80,28 +79,9 @@ export default {
         console.log(err)
       })
     },
-    // updateArticleDetail() {
-    //   const article = this.article
-    //   const title = this.title
-    //   const content = this.content
-    //   const movie = this.movie
-    //   const Token = this.Token
-
-    //   axios({
-    //     method: 'put',
-    //     url: `${API_URL}/articles/${ article.id }/`,
-    //     data: { title, content, movie },
-    //     headers: {
-    //       Authorization: `Token ${Token}`
-    //     },
-    //   })
-    //   .then(() => {
-    //     this.$router.push({ name: 'ArticleView' })
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    // },
+    goToArticleUpdate() {
+      this.$router.push(`/articles/${this.article_id}/update`)
+    },
     deleteArticleDetail() {
       const Token = this.Token
       const article = this.article_id

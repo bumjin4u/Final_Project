@@ -1,7 +1,14 @@
 <template>
   <div>
-    <p>{{ comment.content }}</p>
-    <button v-if="flag" @click="deleteCommentItem">삭제</button>
+    <div v-if="!updateMode">
+      <p>{{ content }}</p>
+      <button v-if="flag" @click="deleteCommentItem">삭제</button>
+      <button @click="changeMode">수정</button>
+    </div>
+    <div v-else>
+      <input type="text" v-model="content">
+      <button @click="updateComment">수정하기</button>
+    </div>
     <hr>
   </div>
 </template>
@@ -23,7 +30,9 @@ export default {
   },
   data : function(){
     return {
-      flag : false
+      flag : false,
+      updateMode : false,
+      content : this.comment.content
     }
   },
   created(){
@@ -65,6 +74,24 @@ export default {
           return comment.id===this.comment.id
         })
       })
+    },
+    changeMode(){
+      this.updateMode = !this.updateMode
+    },
+    updateComment(){
+      axios({
+        method : "PUT",
+        url : `http://127.0.0.1:8000/articles/comments/${this.comment.id}/`,
+        data : {
+          content : this.content
+        },
+        headers : {
+          Authorization : `Token ${this.$store.state.Token}`
+        }
+      })
+        .then(()=>{
+          this.changeMode()
+        })
     }
   }
 }
