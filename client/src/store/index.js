@@ -14,8 +14,6 @@ export default new Vuex.Store({
     createdPersistedState(),
   ],
   state: {
-    articles: [
-    ],
     Token : null,
     Username : null
   },
@@ -25,9 +23,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    GET_ARTICLES(state, articles) {
-      state.articles = articles
-    },
     SAVE_TOKEN(state, Token) {
       state.Token = Token
     },
@@ -42,20 +37,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getArticles(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/articles/`,
-      })
-        .then((res) => {
-          context.commit('GET_ARTICLES', res.data)
-
-        })
-        .catch((err) => {
-        console.log(err)
-        console.log('에러')
-      })
-    },
     signup(context, payload) {
       axios({
         method:'post',
@@ -81,7 +62,6 @@ export default new Vuex.Store({
         context.commit('SAVE_TOKEN', res.data.key)
         const account = JSON.parse(res.config.data)
         context.commit('SAVE_USERNAME', account.username)
-        console.log(res)
 
         router.push({ name: 'ArticleView' })
         

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Article Page</h1>
-    <router-link :to="{ name: 'ArticleCreateView' }" @click="is_Logined">[CREATE]</router-link>
+    <a @click="is_Logined">[CREATE]</a>
     <ArticleList />
     <hr>
   </div>
@@ -20,21 +20,16 @@ export default {
       return this.$store.getters.isLogin // 로그인 여부
     }
   },
-  created() {
-    this.getArticles()
-  },
   methods: {
-    getArticles() {
-      this.$store.dispatch('getArticles')
-    },
-  is_Logined() {
-    if (this.isLogin) {
-      this.$router.push({ name: 'ArticleView' })
+    is_Logined() {
+      if (this.isLogin) {
+        this.$router.push({ name: 'ArticleCreateView' })
+      }
+      else {
+        alert('로그인이 필요한 서비스입니다')
+        this.$router.push({ name: 'LoginView' })
+      }
     }
-    else {
-      this.$router.push({ name: 'LoginView' })
-    }
-  }
   }
 }
 </script>
