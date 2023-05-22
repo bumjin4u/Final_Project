@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
-import createdPersistedState from 'vuex-persistedstate'
 
 const API_URL = 'http://127.0.0.1:8000'
 
@@ -10,9 +9,6 @@ Vue.use(Vuex)
 
 
 export default new Vuex.Store({
-  plugins : [
-    createdPersistedState(),
-  ],
   state: {
     Token : null,
     Username : null

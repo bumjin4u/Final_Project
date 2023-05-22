@@ -38,9 +38,10 @@ class ArticleDetailSerializer(serializers.ModelSerializer): # GET
 
     like_count = serializers.IntegerField(source='like_users.count', read_only=True)
     movie = MovieSerializer(read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Article
-        fields = ('id', 'user','title','content','created_at','updated_at', 'movie', 'like_count')
+        fields = ('id', 'user','title','content','created_at','updated_at', 'movie', 'like_count', 'username')
         read_only_fields = ('user', 'movie')
 
 

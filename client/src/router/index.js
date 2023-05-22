@@ -67,7 +67,7 @@ const routes = [
     component: ActorDetailView
   },
   {
-    path: '/profile/',
+    path: '/profile/:username',
     name: 'ProfileView',
     component: ProfileView
   },

@@ -2,6 +2,7 @@
   <div>
     <h1>Detail</h1>
     <p>글 번호 : {{ article?.id }}</p>
+    <a @click="goToProfile">작성자 : {{ article?.user }}</a>
     <p>제목 : {{ article?.title }}</p>
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
@@ -14,9 +15,9 @@
     />
     <br>
 
-    <button @click="goToArticleUpdate">수정</button>
+    <button v-if="Author" @click="goToArticleUpdate">수정</button>
     <br>
-    <button @click="deleteArticleDetail">삭제</button>
+    <button v-if="Author" @click="deleteArticleDetail">삭제</button>
     
 
     <div v-if="flag">
@@ -29,7 +30,7 @@
     :article="article_id"
     />
 
-    <!--  -->
+
   </div>
 </template>
 
@@ -52,7 +53,8 @@ export default {
     return {
       article: null,
       article_id : Number(this.$route.params.id),
-      flag : false
+      flag : false,
+      Author : false
     }
   },
   created() {
@@ -62,7 +64,8 @@ export default {
   computed: {
     Token() {
       return this.$store.state.Token
-    }
+    },
+
   },
   methods: {
     getArticleDetail() {
@@ -74,6 +77,7 @@ export default {
       })
       .then((res) => {
         this.article = res.data
+        this.Author = this.article.username === this.$store.state.Username
       })
       .catch((err) => {
         console.log(err)
@@ -136,6 +140,10 @@ export default {
           return like_article.id===this.article_id
         })
       })
+    },
+    goToProfile() {
+
+      this.$router.push({name: 'ProfileView'})
     }
   }
 }
