@@ -6,6 +6,7 @@
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
+    <p>추천수 : {{ article?.like_count }}</p>
 
     <MovieItem 
     v-if="article"
@@ -16,7 +17,14 @@
     <!-- <button @click="updateArticleDetail">수정</button>
     <br> -->
     <button @click="deleteArticleDetail">삭제</button>
+    
 
+    <div v-if="flag">
+      <button @click="ArticleLike">좋아요 해제</button>
+    </div>
+    <div v-else>
+      <button @click="ArticleLike">좋아요</button>
+    </div>
     <CommentList 
     :article="article_id"
     />
@@ -44,10 +52,13 @@ export default {
     return {
       article: null,
       article_id : Number(this.$route.params.id),
+      flag : false
     }
   },
   created() {
-    this.getArticleDetail()
+    this.getArticleDetail(),
+    this.checkUser(),
+    console.log(this.article)
   },
   computed: {
     Token() {
@@ -64,7 +75,6 @@ export default {
       })
       .then((res) => {
         this.article = res.data
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -108,6 +118,43 @@ export default {
       })
       .catch((err) => {
         console.log(err)
+      })
+    },
+    ArticleLike() {
+      const Token = this.Token
+      const article = this.article_id
+
+      axios({
+        method: 'put',
+        url: `${API_URL}/articles/${ article }/like/`,
+        headers: {
+          Authorization: `Token ${Token}`
+        },
+      })
+      .then(() => {
+        this.getArticleDetail(),
+        this.checkUser()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    checkUser() {
+      const username = this.$store.state.Username
+      if (!username ){
+        return 
+      }
+      axios({
+        method : "GET",
+        url : `${API_URL}/user/${username}/`,
+        headers : {
+          Authorization : `Token ${this.Token}`
+        }
+      })
+      .then((response)=>{
+        this.flag = response.data.like_articles.some((like_article)=>{
+          return like_article.id===this.article_id
+        })
       })
     }
   }

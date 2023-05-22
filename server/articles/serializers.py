@@ -24,10 +24,11 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer): # POST
 
+
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user', 'like_users')
+        read_only_fields = ('user', 'like_users', )
 
 class ArticleDetailSerializer(serializers.ModelSerializer): # GET
     class MovieSerializer(serializers.ModelSerializer):
@@ -35,10 +36,11 @@ class ArticleDetailSerializer(serializers.ModelSerializer): # GET
             model=Movie
             fields = ('id','title','original_title','poster_path')
 
+    like_count = serializers.IntegerField(source='like_users.count', read_only=True)
     movie = MovieSerializer(read_only=True)
     class Meta:
         model = Article
-        fields = ('id', 'user','title','content','created_at','updated_at', 'movie')
+        fields = ('id', 'user','title','content','created_at','updated_at', 'movie', 'like_count')
         read_only_fields = ('user', 'movie')
 
 

@@ -11,6 +11,7 @@
     <h3>Comment List</h3>
     <CommentListItem 
     v-for="comment in comments" :key="comment.id" :comment="comment"
+    @deleteComment="getComments"
     />
   </div>
 </template>
@@ -51,7 +52,6 @@ export default {
       })
       .then((res) => {
         this.comments = res.data
-        console.log(res)
       })
       .catch((err) => {
       console.log(err)
