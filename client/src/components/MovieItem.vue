@@ -16,7 +16,12 @@ export default {
   },
   methods : {
     goToDetail : function(){
-      this.$router.push(`/movies/${this.movie.id}`)
+      if (this.$router.history.current.path === '/articles/create'){
+        this.$emit('selectMovie',this.movie)
+      }
+      else{
+        this.$router.push(`/movies/${this.movie.id}`)
+      }
     }
   }
 }

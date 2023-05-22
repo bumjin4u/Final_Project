@@ -1,21 +1,16 @@
 <template>
   <div>
-    <form @submit.prevent="search">
-      <div v-if="dynamicProps === 'actor'">
+    <form action="" v-if="dynamicProps === 'actor'" @submit.prevent="searchActor">
         <label for="actor">배우 : </label>
-        <input type="text" id="actor" v-model="actor"><br>
-
+        <input type="text" id="actor" v-model="actor">
         <input type="submit" value="submit">
-      </div>
-
-      <div v-else>
-        <label for="movie">영화 : </label>
-        <input type="text" id="movie" v-model="movie"><br>
-
-        <input type="submit" value="submit">
-      </div>
     </form>
-     
+
+    <form v-if="dynamicProps === 'movie'" @submit.prevent="searchMovie">
+      <label for="movie">영화 : </label>
+      <input type="text" id="movie" v-model="movie">
+      <input type="submit" value="submit">
+    </form>
   </div>
 </template>
 
@@ -29,51 +24,39 @@ export default {
   },
   data() {
     return {
-      actor: null,
-      movie: null,
-      data: null
+      actor: ' ',
+      movie: ' ',
+      data: null,
     }
   },
   methods: {
-    search() {
-      if (this.actor != null) {
-        const actor = this.actor
-        axios({
-          url : `http://127.0.0.1:8000/actors/search/actor/${actor}/`,
-          method : 'get'
+    searchActor() {
+      axios({
+        url : `http://127.0.0.1:8000/actors/search/actor/${this.actor}/`,
+        method : 'GET'
+      })
+        .then((response)=>{
+          this.data = response.data
+          this.$emit('getActors', this.data)
         })
-          .then((response)=>{
-            // console.log(response.data)
-            this.data = response.data
-            const data = this.data
-            this.$emit('child-to-parent', data)
-            // console.log(data)
-          })
-          .catch((error)=>{
-            console.log(error)
-          })
-        this.actor = null
-      }
-      else {
-        const movie = this.movie
-        axios({
-          url : `http://127.0.0.1:8000/movies/search/movie/${movie}/`,
-          method : 'get'
+        .catch((error)=>{
+          console.log(error)
         })
-          .then((response)=>{
-            this.data = response.data
-            // console.log(this.data)
-            const data = this.data
-            this.$emit('child-to-parent', data)
-            // console.log(data)
-          })
-          .catch((error)=>{
-            console.log(error)
-          })
-        this.movie = null
-      }
     },
-  }
+    searchMovie(){
+      axios({
+          url : `http://127.0.0.1:8000/movies/search/movie/${this.movie}/`,
+          method : 'GET'
+        })
+          .then((response)=>{
+            this.data = response.data
+            this.$emit('getMovies', this.data)
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
+    },
+  },
 }
 </script>
 

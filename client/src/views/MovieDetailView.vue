@@ -49,7 +49,6 @@ export default {
           this.movie = response.data
           this.poster_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.poster_path
           this.back_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.backdrop_path
-          console.log(this.movie)
         })
         .catch((error)=>{
           console.log(error)

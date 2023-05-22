@@ -9,8 +9,17 @@
       <label for="content">내용 : </label>
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
       <SearchEngine
-      @child-to-parent="parentGetEvent"
+      @getMovies="saveMovies"
+      dynamic-props="movie"
       />
+      <div v-if="movies">
+        <MovieItem
+        v-for="movie in movies" :key="movie.id"
+        @selectMovie="saveSelectedMovie"
+        :movie="movie"
+        :class="{'selected':selected(movie)}"
+        />
+      </div>
       <input type="submit" id="submit">
     </form>
   </div>
@@ -19,18 +28,22 @@
 <script>
 import axios from 'axios'
 import SearchEngine from '@/components/SearchEngine.vue'
+import MovieItem from '@/components/MovieItem.vue'
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'ArticleCreateView',
   components: {
     SearchEngine,
+    MovieItem
   },
   data() {
     return {
       title: null,
       content: null,
-      movie: null,
+      selectedMovie: null,
+      movies : null,
     }
   },
   computed: {
@@ -42,7 +55,7 @@ export default {
     createArticle() {
       const title = this.title
       const content = this.content
-      const movie = this.movie
+      const movie = this.selectedMovie?.id
       const Token = this.Token
 
       if (!title) {
@@ -61,21 +74,32 @@ export default {
         },
       })
       .then(() => {
-        // console.log(res)
         this.$router.push({name: 'ArticleView'})
       })
       .catch((err) => {
-        console.log(err)
+        if (err.response.status === 401){
+          this.$router.push({name : 'LoginView'})
+        }
+        else{
+          console.log(err)
+        }
       })
     },
-    parentGetEvent: function(inputData) {
-      this.movie = inputData[0]['id']
-      // console.log(inputData)
+    saveMovies(movies){
+      this.movies = movies
+    },
+    saveSelectedMovie(movie){
+      this.selectedMovie = movie
+    },
+    selected(movie){
+      return this.selectedMovie === movie
     }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+.selected {
+  border: 1px solid blue;
+}
 </style>
