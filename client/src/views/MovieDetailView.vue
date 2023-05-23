@@ -3,27 +3,37 @@
     <div class="innerBox">
       <h1>{{movie.title}}</h1>
       <div>
-        <div>
-          <img :src="poster_img_url" alt="" onload>
-          <h3>줄거리</h3>
-          <p>{{movie.overview}}</p>
+        <div class="imagebox">
+          <img :src="poster_img_url" alt="" onload style="margin: 10px;">
+          <div style="margin-bottom: 100px;">
+            <h3>줄거리</h3>
+            <p>{{movie.overview}}</p>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3>예고편</h3>
+                <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
+                <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
+              </div>
+              <div>
+                <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
+                <h4>장르</h4>
+                <span v-for="genre in movie.genres" :key="genre.id">|{{genre.name}}| </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <h3>예고편</h3>
-        <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
       </div>
-      <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
-      <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
 
       <div>
-        <h4>장르</h4>
-        <span v-for="genre in movie.genres" :key="genre.id">{{genre.name}} </span>
-      </div>
-      <div>
         <h4>출연진</h4>
-        <ActorItem
-        v-for="actor in movie.actors" :key="actor.id"
-        :actor="actor"
-        />
+        <div class="container">
+          <div class="row row-cols-4 d-flex justify-content-around">
+            <ActorItem
+            v-for="actor in movie.actors" :key="actor.id"
+            :actor="actor"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -98,14 +108,26 @@ export default {
   text-align: center;
   position: relative;
   background-repeat:no-repeat;
-  
+  padding: 20px;
+}
+
+.container h1 {
+  margin: 10px;
+}
+
+.container h2 {
+  margin: 10px;
 }
 .innerBox {
   color: white;
 }
 
+.imagebox {
+  display: flex;
+}
+
 img {
-  width: 300px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
 }
 </style>

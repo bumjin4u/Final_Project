@@ -7,7 +7,7 @@
     <p>작성한 댓글 : {{ profile?.comments }}</p>
     <p>좋아요 누른 댓글 : {{ profile?.like_articles }}</p>
     <p>팔로워 리스트 : {{profile?.followerlist}}</p>
-    <a v-if="checkMyPage()" @click="passwordChange">비밀번호변경</a>
+    <button class="w-btn w-btn-indigo" type="button" v-if="checkMyPage()" @click="passwordChange">비밀번호변경</button>
 
     <div v-if="!checkMyPage()">
       <button v-if="checkFollow()" @click="Follow">팔로우 해제</button>
@@ -19,6 +19,7 @@
 
 <script>
 import axios from 'axios'
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
@@ -92,5 +93,42 @@ export default {
 </script>
 
 <style>
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
 
+.w-btn-outline {
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-indigo {
+    background-color: aliceblue;
+    color: #1e6b7b;
+}
+
+.w-btn-indigo-outline {
+    border: 3px solid aliceblue;
+    color: #1e6b7b;
+}
+
+.w-btn-indigo-outline:hover {
+    color: #1e6b7b;
+    background: aliceblue;
+}
 </style>
