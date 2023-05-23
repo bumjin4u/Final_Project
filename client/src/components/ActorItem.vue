@@ -1,7 +1,10 @@
 <template>
-  <div v-if="profile_img_url" @click="goToDetail">
-    <img :src="profile_img_url" alt="">
-    <p>{{actor.name}}</p>
+  <div v-if="profile_img_url" @click="goToDetail" class="card" style="width: 18.8rem;">
+    <img :src="profile_img_url" alt="" class="card-img-top">
+    <div class="card-body">
+      <p class="card-text">{{actor.name}}</p>
+    </div>
+
   </div>
 </template>
 

@@ -1,16 +1,22 @@
 <template>
   <div v-if="actors">
-    ActorList
-    <ActorItem 
-    v-for="actor in actors" :key="actor.id"
-    :actor="actor"
-    />
+    <h1>ActorList</h1>
+    <br>
+    <div class="container">
+      <div class="row row-cols-4">
+        <ActorItem 
+        v-for="actor in actors" class="col" :key="actor.id"
+        :actor="actor"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import ActorItem from './ActorItem.vue'
+import _ from 'lodash'
 
 export default {
     name : "ActorList",
@@ -29,7 +35,7 @@ export default {
           url : 'http://127.0.0.1:8000/actors/'
         })
           .then((response)=>{
-            this.actors = response.data.slice(0,30)
+            this.actors = _.sampleSize(response.data, 50)
           })
           .catch((error)=>{
             console.log(error)

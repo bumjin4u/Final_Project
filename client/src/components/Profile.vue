@@ -6,13 +6,13 @@
     <p>작성한 게시물 : {{ profile?.articles }}</p>
     <p>작성한 댓글 : {{ profile?.comments }}</p>
     <p>좋아요 누른 댓글 : {{ profile?.like_articles }}</p>
+    <p>팔로워 리스트 : {{profile?.followerlist}}</p>
     <a @click="passwordChange">비밀번호변경</a>
-    <div v-if="flag">
-      <button @click="Follow">팔로우 해제</button>
-    </div>
-    <div v-else>
-      <button @click="Follow">팔로우</button>
-    </div>
+
+    <button @click="Follow">팔로우 해제</button>
+
+    <button @click="Follow">팔로우</button>
+
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       profile: null,
-      flag : false
+      falg : false
     }
   },
   computed: {
@@ -37,8 +37,7 @@ export default {
     },
   },
   created() {
-    this.getProfile(),
-    this.checkUser()
+    this.getProfile()
   },
   methods: {
     getProfile() {
@@ -52,6 +51,7 @@ export default {
       .then((res) => {
         // console.log(res)
         this.profile = res.data
+        console.log(this.profile)
       })
       .catch((err) => {
         console.log(err)
@@ -62,36 +62,18 @@ export default {
       const userId = this.profile.id
 
       axios({
-        method: 'put',
+        method: 'post',
         url: `${API_URL}/user/${ userId }/follow/`,
         headers: {
           Authorization: `Token ${Token}`
         },
       })
-      .then(() => {
-        this.getArticleDetail(),
-        this.checkUser()
+      .then((res) => {
+        this.getProfile(),
+        console.log(res)
       })
       .catch((err) => {
         console.log(err)
-      })
-    },
-    checkUser() {
-      const username = this.$store.state.Username
-      if (!username ){
-        return 
-      }
-      axios({
-        method : "GET",
-        url : `${API_URL}/user/${username}/`,
-        headers : {
-          Authorization : `Token ${this.Token}`
-        }
-      })
-      .then((response)=>{
-        this.flag = response.data.like_articles.some((like_article)=>{
-          return like_article.id===this.article_id
-        })
       })
     },
     passwordChange() {

@@ -26,11 +26,18 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    class FollowerSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = get_user_model()
+            fields = ('id','username')
+
     comments = CommentSerializer(many=True, read_only=True)
     articles = ArticleSerializer(many=True, read_only=True)
     like_articles = ArticleSerializer(many=True, read_only=True)
     followings = serializers.IntegerField(source='followings.count', read_only=True)
-    followers = serializers.IntegerField(source='followers.count', read_only=True)
+    followers_count = serializers.IntegerField(source='followers.count', read_only=True)
+    followers = FollowerSerializer(many=True, read_only=True)
+
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'followings', 'followers', 'comments', 'articles', 'like_articles',)
+        fields = ('id', 'username', 'followings', 'followers', 'comments', 'articles', 'like_articles','followers_count','followers')

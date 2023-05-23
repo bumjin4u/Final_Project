@@ -1,10 +1,10 @@
 <template>
   <div v-if="movie" @click="goToDetail">
     <!-- 카드로 바꿀 것 -->
+    <img :src="getImgURL(movie.poster_path)" alt="">
     <p>id : {{movie.id}}</p>
     <p>title : {{movie.title}}</p>
     <p>original_title : {{movie.original_title}}</p>
-    <p>poster_path : {{movie.poster_path}}</p>
   </div>
 </template>
 
@@ -23,11 +23,17 @@ export default {
       else{
         this.$router.push(`/movies/${this.movie.id}`)
       }
+    },
+    getImgURL(path){
+      return `https://image.tmdb.org/t/p/original${path}`
     }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+img {
+  width: 100px;
+  height: 100px;
+}
 </style>
