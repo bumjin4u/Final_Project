@@ -1,10 +1,12 @@
 <template>
-  <div v-if="movie" @click="goToDetail">
+  <div v-if="movie" @click="goToDetail" class="card" style="width: 18rem; padding-left: 0px; margin: 1em;">
     <!-- 카드로 바꿀 것 -->
-    <img :src="getImgURL(movie.poster_path)" alt="">
-    <p>id : {{movie.id}}</p>
-    <p>title : {{movie.title}}</p>
-    <p>original_title : {{movie.original_title}}</p>
+    <img :src="getImgURL(movie.poster_path)" alt="" class="card-img-top">
+    <div class="card-body">
+      <p class="card-text">id : {{movie.id}}</p>
+      <p class="card-text">title : {{movie.title}}</p>
+      <p class="card-text">original_title : {{movie.original_title}}</p>
+    </div>
   </div>
 </template>
 
@@ -32,8 +34,9 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 100px;
-  height: 100px;
+.card-img-top {
+  width: 18rem;
+  height: 15rem;
+  object-fit: cover;
 }
 </style>

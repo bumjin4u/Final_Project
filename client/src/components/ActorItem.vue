@@ -1,5 +1,5 @@
 <template>
-  <div v-if="profile_img_url" @click="goToDetail" class="card" style="width: 18.8rem;">
+  <div v-if="profile_img_url" @click="goToDetail" class="card" style="width: 18rem; padding-left: 0px; margin: 1em;">
     <img :src="profile_img_url" alt="" class="card-img-top">
     <div class="card-body">
       <p class="card-text">{{actor.name}}</p>
@@ -34,8 +34,10 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 300px;
-  height: 400px;
+
+.card-img-top {
+  width: 18rem;
+  height: 15rem;
+  object-fit: cover;
 }
 </style>

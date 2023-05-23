@@ -3,7 +3,7 @@
     <h1>ActorList</h1>
     <br>
     <div class="container">
-      <div class="row row-cols-4">
+      <div class="row row-cols-4 d-flex justify-content-around">
         <ActorItem 
         v-for="actor in actors" class="col" :key="actor.id"
         :actor="actor"

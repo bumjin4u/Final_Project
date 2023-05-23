@@ -1,27 +1,30 @@
 <template>
-  <div v-if="movie" class="body" :style="{'background-image':`url(${back_img_url})`}">
-    <h1>{{movie.title}}</h1>
-    <div>
-      <h3>예고편</h3>
-      <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
-    </div>
-    <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
-    <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
-    <div>
-      <img :src="poster_img_url" alt="" onload>
-      <h3>줄거리</h3>
-      <p>{{movie.overview}}</p>
-    </div>
-    <div>
-      <h4>장르</h4>
-      <span v-for="genre in movie.genres" :key="genre.id">{{genre.name}} </span>
-    </div>
-    <div>
-      <h4>출연진</h4>
-      <ActorItem
-      v-for="actor in movie.actors" :key="actor.id"
-      :actor="actor"
-      />
+  <div v-if="movie" class="container" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
+    <div class="innerBox">
+      <h1>{{movie.title}}</h1>
+      <div>
+        <div>
+          <img :src="poster_img_url" alt="" onload>
+          <h3>줄거리</h3>
+          <p>{{movie.overview}}</p>
+        </div>
+        <h3>예고편</h3>
+        <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
+      </div>
+      <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
+      <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
+
+      <div>
+        <h4>장르</h4>
+        <span v-for="genre in movie.genres" :key="genre.id">{{genre.name}} </span>
+      </div>
+      <div>
+        <h4>출연진</h4>
+        <ActorItem
+        v-for="actor in movie.actors" :key="actor.id"
+        :actor="actor"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -87,12 +90,22 @@ export default {
 </script>
 
 <style scoped>
+
+.container{
+  background-size: 100% ;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  background-repeat:no-repeat;
+  
+}
+.innerBox {
+  color: white;
+}
+
 img {
   width: 300px;
   height: 400px;
-}
-.body {
-  background-size: 50% ;
-  background-repeat:no-repeat;
 }
 </style>
