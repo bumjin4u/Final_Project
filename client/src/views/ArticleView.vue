@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Article Page</h1>
-    <a @click="is_Logined">[CREATE]</a>
+    <h1>커뮤니티</h1>
+    <a class="btn" @click="is_Logined">글 작성</a>
     <ArticleList />
     <hr>
   </div>
@@ -34,6 +34,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

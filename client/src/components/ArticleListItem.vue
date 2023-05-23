@@ -1,15 +1,11 @@
 <template>
-  <div>
-    <h5>{{ article.id }}</h5>
-    <p>{{ article.title }}</p>
-    <p @click="goProfile">{{ article.username }}</p>
-    <p>{{ article.like_count }}</p>
-    <router-link :to="{
-      name: 'ArticleDetailView',
-      params: {id: article.id }}">
-      [DETAIL]
-    </router-link>
-    <hr>
+  <div class="d-flex justify-content-between align-items-center">
+    <h5>No. {{ article.id }}</h5>
+    <h5 class="underline" @click="goToDetail">{{ article.title }}</h5>
+    <div>
+      <h5 class="underline" @click="goProfile">{{ article.username }}</h5>
+      <h5>좋아요 : {{ article.like_count }}</h5>
+    </div>
   </div>
 </template>
 
@@ -24,10 +20,15 @@ export default {
     goProfile() {
       this.$router.push({name: 'ProfileView', params : {username : this.article.username}})
     },
+    goToDetail(){
+      this.$router.push({name: 'ArticleDetailView',params: {id: this.article.id }})
+    }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+.underline:hover {
+  text-decoration: underline;
+}
 </style>

@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link :to="{ name: 'MovieView'}">영화</router-link> |
-      <router-link :to="{ name: 'ActorView'}">배우</router-link> |
-      <router-link :to="{ name: 'ArticleView'}">게시물</router-link> |
-      <router-link :to="{ name: 'SearchView'}">검색</router-link> |
-      <router-link :to="{ name: 'RecommentdationView'}">추천</router-link> |
-      <router-link v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입 |</router-link>
-      <router-link v-if="!isLogin" :to="{ name: 'LoginView'}">로그인 |</router-link>
-      <router-link v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">내 프로필 |</router-link>
-      <span v-if="isLogin">{{ username }}님.</span>
-      <a v-if="isLogin" @click="logout">로그아웃</a>
-    </nav>
-    <router-view/>
+    <div class="row">
+      <nav class="col-1 mt-5">
+        <router-link class="btn mt-1" :to="{ name: 'MovieView'}">영화</router-link><br>
+        <router-link class="btn mt-1" :to="{ name: 'ActorView'}">배우</router-link><br>
+        <router-link class="btn mt-1" :to="{ name: 'ArticleView'}">게시물</router-link><br>
+        <router-link class="btn mt-1" :to="{ name: 'SearchView'}">검색</router-link><br>
+        <router-link class="btn mt-1" :to="{ name: 'RecommentdationView'}">추천</router-link><br>
+        <router-link class="btn mt-1" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입<br></router-link>
+        <router-link class="btn mt-1" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인<br></router-link>
+        <router-link class="btn mt-1" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님<br></router-link>
+        <a class="btn mt-1" v-if="isLogin" @click="logout">로그아웃</a><br>
+      </nav>
+      <router-view class="col-10 mb-5"/>
+    </div>
+    <footer class="fixed-bottom bg-dark text-white">
+      master ahn, slave park
+    </footer>
   </div>
 </template>
 
@@ -46,6 +50,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-top: 50px;
 }
 
 nav {
@@ -59,5 +64,8 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+.navBar {
+  width: 300px;
 }
 </style>

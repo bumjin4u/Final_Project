@@ -1,12 +1,7 @@
 <template>
-  <div v-if="movie" @click="goToDetail" class="card" style="width: 18rem; padding-left: 0px; margin: 1em;">
+  <div v-if="movie" @click="goToDetail" class="col">
     <!-- 카드로 바꿀 것 -->
-    <img :src="getImgURL(movie.poster_path)" alt="" class="card-img-top">
-    <div class="card-body">
-      <p class="card-text">id : {{movie.id}}</p>
-      <p class="card-text">title : {{movie.title}}</p>
-      <p class="card-text">original_title : {{movie.original_title}}</p>
-    </div>
+    <img :src="getImgURL(movie.poster_path)" alt="" class="rounded">
   </div>
 </template>
 
@@ -28,15 +23,19 @@ export default {
     },
     getImgURL(path){
       return `https://image.tmdb.org/t/p/original${path}`
-    }
+    },
   }
 }
 </script>
 
 <style scoped>
-.card-img-top {
-  width: 18rem;
-  height: 15rem;
-  object-fit: cover;
+img {
+  margin-top : 1rem;
+  width: 12rem;
+  height: 16rem;
+  transition: .8s;
+}
+img:hover {
+  scale: 1.1;
 }
 </style>

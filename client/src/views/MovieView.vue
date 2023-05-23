@@ -1,6 +1,5 @@
 <template>
   <div>
-    MovieView
     <MovieList/>
   </div>
 </template>
