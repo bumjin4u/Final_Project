@@ -2,13 +2,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
-
+import createdPersistedState from 'vuex-persistedstate'
 const API_URL = 'http://127.0.0.1:8000'
 
 Vue.use(Vuex)
 
 
 export default new Vuex.Store({
+  plugins : [
+    createdPersistedState(),
+  ],
   state: {
     Token : null,
     Username : null
@@ -46,8 +49,8 @@ export default new Vuex.Store({
         router.push({ name: 'ArticleView' })
         
        })
-       .catch((err) => {
-        console.log(err)
+       .catch(() => {
+        alert('비밀번호가 서로 다릅니다.')
        })
     },
     login(context, payload) {
@@ -64,8 +67,8 @@ export default new Vuex.Store({
         router.push({ name: 'ArticleView' })
         
        })
-       .catch((err) => {
-        console.log(err)
+       .catch(() => {
+        alert('아이디 혹은 비밀번호가 틀렸습니다.')
        })
     },
     logout(context) {

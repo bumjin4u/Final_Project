@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     Username() {
-      return this.$store.state.Username
+      return this.$route.params.username
     },
     Token() {
       return this.$store.state.Token

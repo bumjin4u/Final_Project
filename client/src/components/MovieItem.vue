@@ -1,5 +1,5 @@
 <template>
-  <div @click="goToDetail">
+  <div v-if="movie" @click="goToDetail">
     <!-- 카드로 바꿀 것 -->
     <p>id : {{movie.id}}</p>
     <p>title : {{movie.title}}</p>

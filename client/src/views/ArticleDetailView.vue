@@ -2,7 +2,7 @@
   <div>
     <h1>Detail</h1>
     <p>글 번호 : {{ article?.id }}</p>
-    <a @click="goToProfile">작성자 : {{ article?.user }}</a>
+    <a @click="goToProfile">작성자 : {{ article?.username }}</a>
     <p>제목 : {{ article?.title }}</p>
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
@@ -142,8 +142,13 @@ export default {
       })
     },
     goToProfile() {
-
-      this.$router.push({name: 'ProfileView'})
+      if (this.$store.getters.isLogin){
+        this.$router.push(`/profile/${this.article.username}`)
+      }
+      else {
+        alert('로그인이 필요한 서비스 입니다.')
+        this.$router.push('/login')
+      }
     }
   }
 }
