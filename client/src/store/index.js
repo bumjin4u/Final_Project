@@ -50,7 +50,7 @@ export default new Vuex.Store({
         
        })
        .catch(() => {
-        alert('비밀번호가 서로 다릅니다.')
+        alert('이미 존재하는 아이디거나 비밀번호가 서로 다릅니다.')
        })
     },
     login(context, payload) {

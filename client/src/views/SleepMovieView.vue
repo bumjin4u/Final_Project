@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <h1>보다가 자버리는 그런 st...</h1>
+    <MovieItem
+    v-for="movie in movies" :key="movie.id"
+    :movie="movie"
+    />
+  </div>
+</template>
+
+<script>
+import MovieItem from '@/components/MovieItem.vue'
+import axios from 'axios'
+export default {
+  name : "SleepMovieView",
+  components : {
+    MovieItem
+  },
+  data : function(){
+    return {
+      movies : null
+    }
+  },
+  methods : {
+    getSleepMovies : function(){
+      axios({
+        method : "GET",
+        url : "http://127.0.0.1:8000/movies/SleepMovie"
+      })
+        .then((response)=>{
+          this.movies = response.data
+        })
+    }
+  },
+  created(){
+    this.getSleepMovies()
+  }
+}
+</script>
+
+<style>
+
+</style>

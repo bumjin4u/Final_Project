@@ -1,7 +1,12 @@
 <template>
   <div v-if="movie" class="body" :style="{'background-image':`url(${back_img_url})`}">
     <h1>{{movie.title}}</h1>
+    <div>
+      <h3>예고편</h3>
+      <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
+    </div>
     <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
+    <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
     <div>
       <img :src="poster_img_url" alt="" onload>
       <h3>줄거리</h3>
@@ -36,7 +41,8 @@ export default {
       BASE_URL : 'http://127.0.0.1:8000',
       movie : null,
       poster_img_url : null,
-      back_img_url : null
+      back_img_url : null,
+      trailer_url : null,
     }
   },
   methods : {
@@ -53,10 +59,29 @@ export default {
         .catch((error)=>{
           console.log(error)
         })
+    },
+    getTrailerURL(){
+      axios({
+        method : "GET",
+        url : `https://api.themoviedb.org/3/movie/${this.movie_id}/videos?language=ko-KR`,
+        headers : {
+          "accept": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWNmYWRjNTI2NjkwNzcxNDQ1YzU4YWY1NWVjMWU3ZCIsInN1YiI6IjYzZDMxODA2ZTcyZmU4MDBlOWU2YTU1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QX0Tk_RtXEBQcwdsCVO__ZPTgJGmOBjTRlf2yPdXDUU"
+        }
+      })
+        .then((response)=>{
+          for (let info of response.data.results){
+            if (info.type == "Trailer"){
+              this.trailer_url = `https://www.youtube.com/embed/${info.key}`
+              break
+            }
+          }
+        })
     }
   },
   created(){
-    this.getMovieDetail()
+    this.getMovieDetail(),
+    this.getTrailerURL()
   }
 }
 </script>

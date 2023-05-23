@@ -13,6 +13,11 @@ import ActorDetailView from '@/views/ActorDetailView'
 import ProfileView from '@/views/ProfileView'
 import ArticleUpdateView from '@/views/ArticleUpdateView'
 import PasswordChangeView from '@/views/PasswordChangeView'
+import BMovieView from '@/views/BMovieView'
+import SleepMovieView from '@/views/SleepMovieView'
+import RecommendationView from '@/views/RecommendationView'
+import TaglineView from '@/views/TaglineView'
+import AnimationView from '@/views/AnimationView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -80,6 +85,31 @@ const routes = [
     path: '/profile/passwordchange',
     name: 'PasswordChangeView',
     component: PasswordChangeView
+  },
+  {
+    path: '/recommendation',
+    name: 'RecommentdationView',
+    component: RecommendationView
+  },
+  {
+    path: '/recommendation/B',
+    name: 'BMovieView',
+    component: BMovieView
+  },
+  {
+    path: '/recommendation/sleep',
+    name: 'SleepMovieView',
+    component: SleepMovieView
+  },
+  {
+    path: '/recommendation/tagline',
+    name: 'TaglineView',
+    component: TaglineView
+  },
+  {
+    path: '/recommendation/isekai',
+    name: 'AnimationView',
+    component: AnimationView
   },
 ]
 

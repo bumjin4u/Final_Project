@@ -5,6 +5,7 @@
       <router-link :to="{ name: 'ActorView'}">배우</router-link> |
       <router-link :to="{ name: 'ArticleView'}">게시물</router-link> |
       <router-link :to="{ name: 'SearchView'}">검색</router-link> |
+      <router-link :to="{ name: 'RecommentdationView'}">추천</router-link> |
       <router-link v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입 |</router-link>
       <router-link v-if="!isLogin" :to="{ name: 'LoginView'}">로그인 |</router-link>
       <router-link v-if="isLogin" :to="{ name: 'ProfileView'}">프로필 |</router-link>
