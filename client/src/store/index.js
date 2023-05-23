@@ -12,7 +12,8 @@ export default new Vuex.Store({
   ],
   state: {
     Token : null,
-    Username : null
+    Username : null,
+    danger : false,
   },
   getters: {
     isLogin(state) {

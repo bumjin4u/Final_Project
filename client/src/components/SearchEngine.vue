@@ -1,24 +1,13 @@
 <template>
   <div>
-    <!-- <form action="" v-if="dynamicProps === 'actor'" @submit.prevent="searchActor">
-        <label for="actor">배우 : </label>
-        <input type="text" id="actor" v-model="actor">
-        <input type="submit" value="submit">
-    </form>
-
-    <form v-if="dynamicProps === 'movie'" @submit.prevent="searchMovie">
-      <label for="movie">영화 : </label>
-      <input type="text" id="movie" v-model="movie">
-      <input type="submit" value="submit">
-    </form> -->
     <div class="input-group mb-3">
       <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">{{target}}</button>
       <ul class="dropdown-menu">
         <li class="dropdown-item" @click="setTarget('영화')">영화</li>
-        <li class="dropdown-item" @click="setTarget('배우')">배우</li>
+        <li v-if="dynamicProps!=='movie'" class="dropdown-item" @click="setTarget('배우')">배우</li>
       </ul>
-      <input type="text" class="form-control" aria-label="Text input with dropdown button" v-model="query" @keyup.enter="search">
-      <button class="btn btn-outline-secondary" @click="search">검색</button>
+      <input type="text" class="form-control" aria-label="Text input with dropdown button" v-model="query">
+      <button class="btn btn-outline-secondary" type="button" @click.prevent="search">검색</button>
     </div>
   </div>
   
@@ -46,19 +35,15 @@ export default {
     search(){
       if (this.target==='선택'){
         alert('항목을 골라주세요')
-        return
       }
-      if (!this.query){
+      else if (!this.query){
         alert('검색어를 입력해주세요.')
-        return
       }
-      if (this.target==='영화'){
+      else if (this.target==='영화'){
         this.searchMovie()
-        return
       }
       else {
         this.searchActor()
-        return
       }
     },
     searchActor() {

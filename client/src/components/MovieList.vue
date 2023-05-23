@@ -2,7 +2,7 @@
   <div>
     <h1><b>인기 영화</b></h1>
     <br>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 d-flex justify-content-start g-1">
+    <div class="row g-1">
       <MovieItem
       v-for="movie in movies" :key="movie.id"
       :movie="movie"
@@ -44,7 +44,7 @@ export default {
           }
           return true
         })
-        this.movies = _.sampleSize(this.movies, 30)
+        this.movies = _.sampleSize(this.movies, 36)
        })
        .catch((error)=>{
         console.log(error)

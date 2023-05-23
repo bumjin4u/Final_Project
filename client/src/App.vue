@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <div class="row">
-      <nav class="col-1 mt-5">
-        <router-link class="btn mt-1" :to="{ name: 'MovieView'}">영화</router-link><br>
-        <router-link class="btn mt-1" :to="{ name: 'ActorView'}">배우</router-link><br>
-        <router-link class="btn mt-1" :to="{ name: 'ArticleView'}">게시물</router-link><br>
-        <router-link class="btn mt-1" :to="{ name: 'SearchView'}">검색</router-link><br>
-        <router-link class="btn mt-1" :to="{ name: 'RecommentdationView'}">추천</router-link><br>
-        <router-link class="btn mt-1" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입<br></router-link>
-        <router-link class="btn mt-1" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인<br></router-link>
-        <router-link class="btn mt-1" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님<br></router-link>
-        <a class="btn mt-1" v-if="isLogin" @click="logout">로그아웃</a><br>
+      <nav class="col-1 col-xs-3 mt-5 border rounded d-flex flex-column justify-content-around">
+        <router-link class="btn itemm" :to="{ name: 'MovieView'}">영화</router-link>
+        <router-link class="btn itemm" :to="{ name: 'ActorView'}">배우</router-link>
+        <router-link class="btn itemm" :to="{ name: 'ArticleView'}">게시물</router-link>
+        <router-link class="btn itemm" :to="{ name: 'SearchView'}">검색</router-link>
+        <router-link class="btn itemm" :to="{ name: 'RecommentdationView'}">추천</router-link>
+        <router-link class="btn itemm" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
+        <router-link class="btn itemm" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
+        <router-link class="btn itemm" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님</router-link>
+        <a class="btn itemm" v-if="isLogin" @click="logout">로그아웃</a>
       </nav>
-      <router-view class="col-10 mb-5"/>
+      <router-view class="col mb-5"/>
     </div>
     <footer class="fixed-bottom bg-dark text-white">
       master ahn, slave park
@@ -55,6 +55,10 @@ export default {
 
 nav {
   padding: 30px;
+  margin-left: 3%;
+}
+.itemm{
+  writing-mode: horizontal-tb;
 }
 
 nav a {
@@ -64,8 +68,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
-.navBar {
-  width: 300px;
 }
 </style>
