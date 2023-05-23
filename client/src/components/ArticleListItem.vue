@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'ArticleListItem',
@@ -24,20 +22,7 @@ export default {
   },
   methods: {
     goProfile() {
-      axios({
-        method: 'get',
-        url: `${API_URL}/user/${this.article.username}`,
-        headers: {
-          Authorization: `Token ${this.Token}`
-        },
-      })
-      .then(() => {
-        // console.log(res)
-        this.$router.push({name: 'ProfileView'})
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      this.$router.push({name: 'ProfileView', params : {username : this.article.username}})
     },
   }
 }

@@ -6,8 +6,6 @@ import createdPersistedState from 'vuex-persistedstate'
 const API_URL = 'http://127.0.0.1:8000'
 
 Vue.use(Vuex)
-
-
 export default new Vuex.Store({
   plugins : [
     createdPersistedState(),
@@ -75,6 +73,7 @@ export default new Vuex.Store({
       context.commit('DELETE_TOKEN')
       context.commit('DELETE_USERNAME')
       alert('로그아웃 됐습니다!')
+      router.push('/')
     },
   },
   modules: {

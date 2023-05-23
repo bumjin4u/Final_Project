@@ -8,7 +8,8 @@
       <router-link :to="{ name: 'RecommentdationView'}">추천</router-link> |
       <router-link v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입 |</router-link>
       <router-link v-if="!isLogin" :to="{ name: 'LoginView'}">로그인 |</router-link>
-      <router-link v-if="isLogin" :to="{ name: 'ProfileView'}">프로필 |</router-link>
+      <router-link v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">내 프로필 |</router-link>
+      <span v-if="isLogin">{{ username }}님.</span>
       <a v-if="isLogin" @click="logout">로그아웃</a>
     </nav>
     <router-view/>
@@ -22,11 +23,17 @@ export default {
   computed: {
     isLogin: function() {
       return this.$store.getters.isLogin
-    }
+    },
+    username: function(){
+      return this.$store.state.Username
+    },
   },
   methods: {
     logout() {
       this.$store.dispatch('logout')
+    },
+    reload(){
+      this.$router.go(0)
     }
   }
 }
