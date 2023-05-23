@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>B급 영화</h1>
+    <h1>어쩌면 명작일지도...</h1>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
     :movie="movie"
