@@ -14,6 +14,7 @@ export default new Vuex.Store({
     Token : null,
     Username : null,
     danger : false,
+    now : '금요일',
   },
   getters: {
     isLogin(state) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     DELETE_USERNAME(state) {
       state.Username = null
+    },
+    CHANGE_NOW(state,status){
+      state.now = status
     }
   },
   actions: {
@@ -76,6 +80,9 @@ export default new Vuex.Store({
       alert('로그아웃 됐습니다!')
       router.push('/')
     },
+    changenow(context,status){
+      context.commit('CHANGE_NOW',status)
+    }
   },
   modules: {
   }

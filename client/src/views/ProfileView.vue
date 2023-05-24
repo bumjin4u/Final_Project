@@ -31,7 +31,8 @@ export default {
     }
   },
   created() {
-    this.getProfile()
+    this.getProfile(),
+    this.$store.dispatch('changenow',this.username)
   },
   beforeRouteUpdate(to, from, next){
       this.username = to.params.username

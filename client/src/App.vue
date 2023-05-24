@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <header>
-      <h1><b>🐯FLEX</b></h1>
+      <img src="@/assets/ldd6.png" alt="">
+      <h1 class="title">{{this.$store.state.now}} 좋아~</h1>
     </header>
     <div class="homegrid">
       <nav class="navBar">
@@ -55,9 +56,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: '@/assets/block2.jpg';
+  background-image: url('@/assets/ConchStreetStock.png');
+  background-attachment:fixed;
+  background-size: 100%;
   color: white;
-  height: 5300px;
+  min-height: 1000px;
 }
 
 .homegrid {
@@ -73,6 +76,7 @@ export default {
   border-radius: 10px;
   height: 400px;
   margin-top : 120px;
+  position: sticky;
 }
 .navItem {
   color: white;
@@ -87,7 +91,19 @@ nav a.router-link-exact-active {
   color: red;
 }
 header {
-  color : red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color : yellow;
   padding-top : 20px;
+}
+img {
+  width: 100px;
+  height: 100px;
+}
+.title {
+  font-size: 60px;
+  font-weight: bolder;
+  margin-left: 20px;
 }
 </style>

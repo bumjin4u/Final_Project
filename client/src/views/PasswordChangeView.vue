@@ -53,6 +53,9 @@ export default {
         console.log(err)
       })
     }
+  },
+  created(){
+    this.$store.dispatch('changenow','비밀번호 변경')
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <h1>어쩌면 명작일지도...</h1>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
@@ -33,7 +33,8 @@ export default {
     }
   },
   created(){
-    this.getBMovies()
+    this.getBMovies(),
+    this.$store.dispatch('changenow','B급영화')
   }
 }
 </script>

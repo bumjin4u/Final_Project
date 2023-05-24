@@ -30,6 +30,9 @@ export default {
         this.$router.push({ name: 'LoginView' })
       }
     }
+  },
+  created(){
+    this.$store.dispatch('changenow','커뮤니티')
   }
 }
 </script>

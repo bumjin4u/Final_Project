@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <h1>보다가 자버리는 그런 st...</h1>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
@@ -33,7 +33,8 @@ export default {
     }
   },
   created(){
-    this.getSleepMovies()
+    this.getSleepMovies(),
+    this.$store.dispatch('changenow','수면영화')
   }
 }
 </script>

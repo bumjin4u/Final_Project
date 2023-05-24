@@ -33,7 +33,7 @@ img {
   margin-top : 1rem;
   width: 300px;
   height: 400px;
-  transition: .8s;
+  transition: .5s;
   border-radius: 3%;
 }
 img:hover {

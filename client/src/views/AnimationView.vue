@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <h3>니코니코니~</h3>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
@@ -34,7 +34,8 @@ export default {
     }
   },
   created(){
-    this.getMovies()
+    this.getMovies(),
+    this.$store.dispatch('changenow','이세계')
   }
 }
 </script>

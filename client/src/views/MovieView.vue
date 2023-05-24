@@ -11,6 +11,9 @@ export default {
   name : "MovieView",
   components : {
     MovieList,
+  },
+  created(){
+    this.$store.dispatch('changenow','영화')
   }
 }
 </script>

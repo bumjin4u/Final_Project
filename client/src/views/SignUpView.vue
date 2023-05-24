@@ -40,6 +40,9 @@ export default {
       this.$store.dispatch('signup', payload)
 
     }
+  },
+  created(){
+    this.$store.dispatch('changenow','회원가입')
   }
 }
 </script>

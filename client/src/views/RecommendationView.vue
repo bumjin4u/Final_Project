@@ -12,7 +12,10 @@
 
 <script>
 export default {
-  name : "RecommentdationView"
+  name : "RecommentdationView",
+  created(){
+    this.$store.dispatch('changenow','추천')
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <div @click="SearchActor">배우</div>
     <div @click="SearchMovie">영화</div>
     <SearchEngine 
@@ -7,13 +7,13 @@
     @getActors="saveActors"
     @getMovies="saveMovies"
     />
-    <div v-if="actors">
+    <div v-if="actors" class="row">
       <ActorItem
       v-for="actor in actors"  :key="actor.id"
       :actor="actor"
       />
     </div>
-    <div v-if="movies">
+    <div v-if="movies" class="row">
       <MovieItem
       v-for="movie in movies" :key="movie.id"
       :movie="movie"
@@ -56,10 +56,12 @@ export default {
       this.movies = movies
       this.actors = null
     },  
+  },
+  created(){
+    this.$store.dispatch('changenow','검색')
   }
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

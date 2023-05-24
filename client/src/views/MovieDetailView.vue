@@ -1,42 +1,35 @@
 <template>
   
-  <div v-if="movie" class="container" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
-    <div class="innerBox">
-      <h1>{{movie.title}}</h1>
+  <div v-if="movie" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
+      <h1 class="title animation">"{{movie.tagline}}"</h1>
+
       <div>
-        <div class="imagebox">
-          <img :src="poster_img_url" alt="" onload style="margin: 10px;">
-          <div style="margin-bottom: 100px;">
-            <h3>줄거리</h3>
-            <p>{{movie.overview}}</p>
-            <div class="d-flex justify-content-between">
-              <div>
-                <h3>예고편</h3>
-                <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
-                <h2 class="animation">{{movie.tagline}}</h2>
-              </div>
-              <div>
-                <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
-                <h4>장르</h4>
-                <span v-for="genre in movie.genres" :key="genre.id">|{{genre.name}}| </span>
-              </div>
+        <div class="info">
+          <img class="poster" :src="poster_img_url" alt="" onload style="margin: 10px;">
+          <div class="docs">
+            <div>
+              <h1>{{movie.title}}</h1>
+              <span v-for="genre in movie.genres" :key="genre.id">{{genre.name}} </span>
+              <p class="overview fadein">{{movie.overview}}</p>
             </div>
+            <h5>⭐ {{ movie.vote_average }} ({{ movie.vote_count }} 명 참여)</h5>
           </div>
+        </div>
+        <div>
+          <h1>| 예고편 |</h1>
+          <iframe :src="trailer_url" frameborder="0" width="700" height="400"></iframe>
         </div>
       </div>
 
-      <div>
-        <h4>출연진</h4>
-        <div class="container">
-          <div class="row row-cols-4 d-flex justify-content-around">
+      <div class="credit">
+        <h1>| 출연진 |</h1>
+          <div class="row">
             <ActorItem
             v-for="actor in movie.actors" :key="actor.id"
             :actor="actor"
             />
           </div>
-        </div>
       </div>
-    </div>
   </div>
 
 </template>
@@ -72,6 +65,7 @@ export default {
           this.movie = response.data
           this.poster_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.poster_path
           this.back_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.backdrop_path
+          this.$store.dispatch('changenow',this.movie.title)
           this.changeFlag()
         })
         .catch((error)=>{
@@ -110,36 +104,6 @@ export default {
 
 <style scoped>
 
-.container{
-  background-size: 100% ;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  position: relative;
-  background-repeat:no-repeat;
-  padding: 20px;
-}
-
-.container h1 {
-  margin: 10px;
-}
-
-.container h2 {
-  margin: 10px;
-}
-.innerBox {
-  color: white;
-}
-
-.imagebox {
-  display: flex;
-}
-
-img {
-  width: 400px;
-  height: 500px;
-}
-
 .animation {
   animation-name: bounce-in;
   animation-duration: 1s;
@@ -149,5 +113,46 @@ img {
     transform: scale(5);
   }
 }
+.poster {
+  width: 300px;
+}
+.info {
+  display: flex;
+}
+.title{
+  font-weight: bolder;
+  padding: 20px;
+}
+.overview {
+  padding: 30px;
+  text-align: left;
+  border-radius: 1%;
+  margin-right: 20px;
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+}
+.docs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.credit {
+  margin-top: 20px;
+}
+.fadein {
+  overflow: hidden;
+  animation: fadein 1s ease-in-out;
+}
 
+@keyframes fadein{
+  0% {
+    opacity: 0;
+    transform: translateY(20px)
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
 </style>

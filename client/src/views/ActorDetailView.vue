@@ -1,5 +1,5 @@
 <template>
-  <div v-if="actor">
+  <div v-if="actor" class="body">
     <div class="profile">
       <img :src="profile_url" alt="">
       <div class="info">
@@ -9,11 +9,12 @@
         <span v-if="actor.deathday">{{actor.deathday}}</span>
       </div>
     </div>
-    <h3>출연작</h3>
-    <MovieItem
+    <div class="row">
+      <MovieItem
       v-for="movie in actor.movies" :key="movie.id"
       :movie="movie"
-    />
+      />
+    </div>
   </div>
 </template>
 
@@ -42,6 +43,7 @@ export default {
       .then((response)=>{
         this.actor = response.data
         this.profile_url = 'https://image.tmdb.org/t/p/original' + this.actor.profile_path
+        this.$store.dispatch('changenow',this.actor.name)
       })
       .catch((error)=>{
         console.log(error)
@@ -58,11 +60,22 @@ export default {
 img {
   width: 300px;
   height: 400px;
+  border-radius: 5%;
 }
 .profile {
   display: flex;
+  padding: 20px;
 }
 .info {
   margin-left: 30px;
+  margin-top: 60px;
+}
+.profile {
+  background-image: url('@/assets/actorprofile.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+}
+.yellow{
+  color: black;
 }
 </style>
