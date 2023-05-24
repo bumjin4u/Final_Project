@@ -20,9 +20,6 @@
         <router-view/>
       </div>
     </div>
-    <footer class="fixed-bottom bg-dark text-white">
-      master ahn, slave park
-    </footer>
   </div>
 </template>
 
@@ -44,7 +41,7 @@ export default {
     },
     reload(){
       if (this.$route.path ==='/'){
-        this.$route.go(0)
+        this.$router.go(0)
       }
       else{
         this.$router.push('/')
@@ -63,9 +60,8 @@ export default {
   color: #2c3e50;
   background-image: url('@/assets/ConchStreetStock.png');
   background-attachment:fixed;
-  background-size: 100%;
   color: white;
-  min-height: 1000px;
+  min-height: 1500px;
 }
 
 .homegrid {

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
 
+    'django_dump_load_utf8',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

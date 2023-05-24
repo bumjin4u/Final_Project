@@ -18,10 +18,20 @@ export default {
   },
   methods: {
     goProfile() {
-      this.$router.push({name: 'ProfileView', params : {username : this.article.username}})
+      if (this.$store.getters.isLogin){
+        this.$router.push({name: 'ProfileView', params : {username : this.article.username}})
+      }
+      else{
+        this.$router.push({name: 'LoginView'})
+      }
     },
     goToDetail(){
-      this.$router.push({name: 'ArticleDetailView',params: {id: this.article.id }})
+      if (this.$store.getters.isLogin){
+        this.$router.push({name: 'ArticleDetailView',params: {id: this.article.id }})
+      }
+      else{
+        this.$router.push({name: 'LoginView'})
+      }
     }
   }
 }
