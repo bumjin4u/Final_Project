@@ -4,7 +4,7 @@
     <h5 class="underline" @click="goToDetail">{{ article.title }}</h5>
     <div>
       <h5 class="underline" @click="goProfile">{{ article.username }}</h5>
-      <h5>좋아요 : {{ article.like_count }}</h5>
+      <h5>&#128077; {{ article.like_count }}</h5>
     </div>
   </div>
 </template>

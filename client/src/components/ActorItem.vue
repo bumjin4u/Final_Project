@@ -1,10 +1,7 @@
 <template>
-  <div v-if="profile_img_url" @click="goToDetail" class="card" style="width: 18rem; padding-left: 0px; margin: 1em;">
-    <img :src="profile_img_url" alt="" class="card-img-top">
-    <div class="card-body">
-      <p class="card-text">{{actor.name}}</p>
-    </div>
-
+  <div v-if="profile_img_url" @click="goToDetail" class="col">
+    <img :src="profile_img_url" alt="">
+      <p>{{actor.name}}</p>
   </div>
 </template>
 
@@ -35,9 +32,9 @@ export default {
 
 <style scoped>
 
-.card-img-top {
-  width: 18rem;
-  height: 15rem;
-  object-fit: cover;
+img {
+  width: 300px;
+  height: 400px;
+  border-radius: 5%;
 }
 </style>

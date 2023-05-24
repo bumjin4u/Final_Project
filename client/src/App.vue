@@ -1,15 +1,18 @@
 <template>
   <div id="app">
+    <header>
+      <h1><b>🐯FLEX</b></h1>
+    </header>
     <div class="homegrid">
       <nav class="navBar">
-        <router-link class="btn" :to="{ name: 'MovieView'}">영화</router-link>
-        <router-link class="btn" :to="{ name: 'ActorView'}">배우</router-link>
-        <router-link class="btn" :to="{ name: 'ArticleView'}">게시물</router-link>
-        <router-link class="btn" :to="{ name: 'SearchView'}">검색</router-link>
-        <router-link class="btn" :to="{ name: 'RecommentdationView'}">추천</router-link>
-        <router-link class="btn" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
-        <router-link class="btn" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
-        <router-link class="btn" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님</router-link>
+        <router-link class="btn navItem" :to="{ name: 'MovieView'}">영화</router-link>
+        <router-link class="btn navItem" :to="{ name: 'ActorView'}">배우</router-link>
+        <router-link class="btn navItem" :to="{ name: 'ArticleView'}">게시물</router-link>
+        <router-link class="btn navItem" :to="{ name: 'SearchView'}">검색</router-link>
+        <router-link class="btn navItem" :to="{ name: 'RecommentdationView'}">추천</router-link>
+        <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
+        <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
+        <router-link class="btn navItem" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님</router-link>
         <a class="btn itemm" v-if="isLogin" @click="logout">로그아웃</a>
       </nav>
       <div class="view">
@@ -52,8 +55,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9));
-  background-image: url('@/assets/blocks.jpg');
+  background-color: rgb(29, 29, 29);
+
   color: white;
   height: 5300px;
 }
@@ -71,8 +74,9 @@ export default {
   border-radius: 10px;
   height: 400px;
   margin-top : 120px;
-  color : white;
-  background-color: white;
+}
+.navItem {
+  color: white;
 }
 
 .view {
@@ -81,6 +85,10 @@ export default {
   padding-top: 30px;
 }
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: red;
+}
+header {
+  color : red;
+  padding-top : 20px;
 }
 </style>

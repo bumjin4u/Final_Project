@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1><b>박스 오피스</b></h1>
-    <br>
     <div class="row g-1">
       <MovieItem
       v-for="movie in movies" :key="movie.id"
@@ -57,6 +55,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+h1 {
+  color: red;
+}
 </style>

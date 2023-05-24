@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
-    <a class="btn" @click="is_Logined">글 작성</a>
+    <a class="btn btn-outline-light" @click="is_Logined">글 작성</a>
     <ArticleList />
     <hr>
   </div>

@@ -1,13 +1,18 @@
 <template>
   <div v-if="actor">
-    <img :src="profile_url" alt="">
-    <p>{{actor.name}}</p>
-    <span v-if="actor.birthday">{{actor.birthday}}</span>
-    <span> ~ </span>
-    <span v-if="actor.deathday">{{actor.deathday}}</span>
+    <div class="profile">
+      <img :src="profile_url" alt="">
+      <div class="info">
+        <h2>{{actor.name}}</h2>
+        <span v-if="actor.birthday">{{actor.birthday}}</span>
+        <span> ~ </span>
+        <span v-if="actor.deathday">{{actor.deathday}}</span>
+      </div>
+    </div>
+    <h3>출연작</h3>
     <MovieItem
-    v-for="movie in actor.movies" :key="movie.id"
-    :movie="movie"
+      v-for="movie in actor.movies" :key="movie.id"
+      :movie="movie"
     />
   </div>
 </template>
@@ -53,5 +58,11 @@ export default {
 img {
   width: 300px;
   height: 400px;
+}
+.profile {
+  display: flex;
+}
+.info {
+  margin-left: 30px;
 }
 </style>

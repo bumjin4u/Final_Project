@@ -1,9 +1,8 @@
 <template>
   <div v-if="actors">
-    <h1>ActorList</h1>
     <br>
     <div class="container">
-      <div class="row row-cols-4 d-flex justify-content-around">
+      <div class="row">
         <ActorItem 
         v-for="actor in actors" class="col" :key="actor.id"
         :actor="actor"
@@ -35,7 +34,7 @@ export default {
           url : 'http://127.0.0.1:8000/actors/'
         })
           .then((response)=>{
-            this.actors = _.sampleSize(response.data, 50)
+            this.actors = _.sampleSize(response.data, 33)
           })
           .catch((error)=>{
             console.log(error)

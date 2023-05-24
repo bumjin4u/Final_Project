@@ -1,6 +1,5 @@
 <template>
   <div>
-    ActorView
     <ActorList />
   </div>
 </template>

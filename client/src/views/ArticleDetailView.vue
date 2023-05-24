@@ -1,30 +1,35 @@
 <template>
   <div>
-    <h1>Detail</h1>
-    <p>글 번호 : {{ article?.id }}</p>
-    <a @click="goToProfile">작성자 : {{ article?.username }}</a>
-    <p>제목 : {{ article?.title }}</p>
-    <p>내용 : {{ article?.content }}</p>
-    <p>작성시간 : {{ article?.created_at }}</p>
-    <p>수정시간 : {{ article?.updated_at }}</p>
-    <p>추천수 : {{ article?.like_count }}</p>
+    <h1>{{ article?.title }}</h1>
+    <header> 
+      <p>글 번호 : {{ article?.id }}</p>
+      <a @click="goToProfile">작성자 : {{ article?.username }}</a>
+    </header>
+    <section><p>{{ article?.content }}</p></section>
      
     <MovieItem 
     v-if="article"
     :movie="article.movie"
     />
     <br>
-
-    <button v-if="Author" @click="goToArticleUpdate">수정</button>
-    <br>
-    <button v-if="Author" @click="deleteArticleDetail">삭제</button>
+    <div class="info">
+      <p>작성시간 : {{ article?.created_at.slice(0,10) }}</p>
+      <p>수정시간 : {{ article?.updated_at.slice(0,10) }}</p>
+      <p>추천수 : {{ article?.like_count }}</p>
+    </div>
+    <div class="btnBox" v-if="Author">
+      <button v-if="Author" @click="goToArticleUpdate">수정</button>
+      <br>
+      <button v-if="Author" @click="deleteArticleDetail">삭제</button>
+    </div>
     
-
     <div v-if="flag">
-      <button @click="ArticleLike">좋아요 해제</button>
+      <p @click="ArticleLike">&#10084;</p>
+      <span>{{ article?.like_count }}</span>
     </div>
     <div v-else>
-      <button @click="ArticleLike">좋아요</button>
+      <p @click="ArticleLike">&#9825;</p>
+      <span>{{ article?.like_count }}</span>
     </div>
     <CommentList 
     :article="article_id"
@@ -153,3 +158,27 @@ export default {
   }
 }
 </script>
+<style scoped>
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+section {
+  text-align: start;
+  width: 1000px;
+  height: 500px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 15px;
+}
+.btnBox {
+  display: flex;
+  justify-content: end;
+}
+</style>

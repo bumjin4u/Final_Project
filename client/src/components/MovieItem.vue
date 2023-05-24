@@ -1,7 +1,7 @@
 <template>
   <div v-if="movie" @click="goToDetail" class="col">
     <!-- 카드로 바꿀 것 -->
-    <img :src="getImgURL(movie.poster_path)" alt="" class="rounded">
+    <img :src="getImgURL(movie.poster_path)" alt="" class="">
   </div>
 </template>
 
@@ -34,6 +34,7 @@ img {
   width: 300px;
   height: 400px;
   transition: .8s;
+  border-radius: 3%;
 }
 img:hover {
   scale: 1.1;

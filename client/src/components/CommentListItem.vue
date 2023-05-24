@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div v-if="!updateMode">
+    <div class="comment" v-if="!updateMode">
       <p>{{ content }}</p>
-      <button v-if="flag" @click="deleteCommentItem">삭제</button>
-      <button v-if="flag" @click="changeMode">수정</button>
+      <div class="btnBox" v-if="flag">
+        <a @click="changeMode">수정</a>
+        <a @click="deleteCommentItem">삭제</a>
+      </div>
     </div>
     <div v-else>
       <input type="text" v-model="content">
@@ -97,6 +99,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.comment {
+  display: flex;
+  background-color : white;
+  color: black;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>
