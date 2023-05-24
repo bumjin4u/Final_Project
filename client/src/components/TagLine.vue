@@ -1,6 +1,6 @@
 <template>
   <div v-if="tagline.tagline" @click="goToDetail">
-    <h1>"{{ tagline.tagline }}"</h1>
+    <h2>"{{ tagline.tagline }}"</h2>
   </div>
 </template>
 
