@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1><b>인기 영화</b></h1>
+    <h1><b>박스 오피스</b></h1>
     <br>
     <div class="row g-1">
       <MovieItem

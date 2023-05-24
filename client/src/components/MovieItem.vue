@@ -31,8 +31,8 @@ export default {
 <style scoped>
 img {
   margin-top : 1rem;
-  width: 12rem;
-  height: 16rem;
+  width: 300px;
+  height: 400px;
   transition: .8s;
 }
 img:hover {
