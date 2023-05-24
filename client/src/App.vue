@@ -55,8 +55,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rgb(29, 29, 29);
-
+  background-image: '@/assets/block2.jpg';
   color: white;
   height: 5300px;
 }
