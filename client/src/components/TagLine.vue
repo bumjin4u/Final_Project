@@ -1,5 +1,5 @@
 <template>
-  <div v-if="tagline.tagline" @click="goToDetail">
+  <div v-if="tagline.tagline" @click="goToDetail" style="cursor:pointer;">
     <h2>"{{ tagline.tagline }}"</h2>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="profile_img_url" @click="goToDetail" class="col">
+  <div v-if="profile_img_url" @click="goToDetail" class="col" style="cursor:pointer;">
     <img :src="profile_img_url" alt="">
       <p>{{actor.name}}</p>
   </div>

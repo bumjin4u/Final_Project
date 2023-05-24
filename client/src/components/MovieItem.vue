@@ -1,5 +1,5 @@
 <template>
-  <div v-if="movie" @click="goToDetail" class="col">
+  <div v-if="movie" @click="goToDetail" class="col" style="cursor:pointer;">
     <!-- 카드로 바꿀 것 -->
     <img :src="getImgURL(movie.poster_path)" alt="" class="">
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header @click="reload">
+    <header @click="[reload, playsound()]">
       <img src="@/assets/ldd6.png" alt="">
       <h1 class="title">{{this.$store.state.now}} 좋아~</h1>
     </header>
@@ -25,6 +25,8 @@
 
 
 <script>
+import sound from '@/assets/Monday.mp3'
+
 export default {
   name: 'App',
   computed: {
@@ -45,6 +47,14 @@ export default {
       }
       else{
         this.$router.push('/')
+      }
+    },
+    playsound() {
+      if (sound) {
+        const audio = new Audio(sound)
+        audio.muted = true
+        audio.play()
+        audio.muted = false
       }
     }
   }

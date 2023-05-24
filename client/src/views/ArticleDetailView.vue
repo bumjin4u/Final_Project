@@ -3,7 +3,7 @@
     <h1>{{ article?.title }}</h1>
     <header> 
       <p>글 번호 : {{ article?.id }}</p>
-      <a @click="goToProfile">작성자 : {{ article?.username }}</a>
+      <a @click="goToProfile" style="cursor:pointer;">작성자 : {{ article?.username }}</a>
     </header>
     <section><p>{{ article?.content }}</p></section>
      
@@ -24,11 +24,11 @@
     </div>
     
     <div v-if="flag">
-      <p @click="ArticleLike">&#10084;</p>
+      <p @click="ArticleLike" style="cursor:pointer;">&#10084;</p>
       <span>{{ article?.like_count }}</span>
     </div>
     <div v-else>
-      <p @click="ArticleLike">&#9825;</p>
+      <p @click="ArticleLike" style="cursor:pointer;">&#9825;</p>
       <span>{{ article?.like_count }}</span>
     </div>
     <CommentList 
