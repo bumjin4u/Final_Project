@@ -106,15 +106,17 @@ export default {
 
 .animation {
   animation-name: bounce-in;
-  animation-duration: 1s;
+  animation-duration: 2.5s;
 }
 @keyframes bounce-in {
   0% {
-    transform: scale(5);
+    transform: scale(30);
+    color: black;
   }
 }
 .poster {
   width: 300px;
+  border-radius: 5%;
 }
 .info {
   display: flex;

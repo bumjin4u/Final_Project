@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>
+    <header @click="reload">
       <img src="@/assets/ldd6.png" alt="">
       <h1 class="title">{{this.$store.state.now}} 좋아~</h1>
     </header>
@@ -14,7 +14,7 @@
         <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
         <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
         <router-link class="btn navItem" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">{{ username }}님</router-link>
-        <a class="btn itemm" v-if="isLogin" @click="logout">로그아웃</a>
+        <a class="btn navItem" v-if="isLogin" @click="logout">로그아웃</a>
       </nav>
       <div class="view">
         <router-view/>
@@ -43,7 +43,12 @@ export default {
       this.$store.dispatch('logout')
     },
     reload(){
-      this.$router.go(0)
+      if (this.$route.path ==='/'){
+        this.$route.go(0)
+      }
+      else{
+        this.$router.push('/')
+      }
     }
   }
 }
@@ -77,6 +82,7 @@ export default {
   height: 400px;
   margin-top : 120px;
   position: sticky;
+  top: 100px;
 }
 .navItem {
   color: white;

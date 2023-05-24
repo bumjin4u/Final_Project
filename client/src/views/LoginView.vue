@@ -9,6 +9,7 @@
       <span class="input-group-text" id="basic-addon1"><b>PW</b></span>
       <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" v-model="password">
     </div>
+    <button class="btn btn-primary" type="button" @click="login">Login</button>
   </div>
 </template>
 

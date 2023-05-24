@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h3>니코니코니~</h3>
+    <h3>반갑다능~</h3>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
     :movie="movie"
