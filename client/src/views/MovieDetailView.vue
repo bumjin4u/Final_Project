@@ -1,4 +1,5 @@
 <template>
+  
   <div v-if="movie" class="container" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
     <div class="innerBox">
       <h1>{{movie.title}}</h1>
@@ -12,7 +13,7 @@
               <div>
                 <h3>예고편</h3>
                 <iframe :src="trailer_url" frameborder="2" width="400" height="300"></iframe>
-                <h2 v-if="movie.tagline">{{movie.tagline}}</h2>
+                <h2 class="animation">{{movie.tagline}}</h2>
               </div>
               <div>
                 <h2>{{ movie.vote_average }} / {{ movie.vote_count }}</h2>
@@ -37,11 +38,13 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import axios from 'axios'
 import ActorItem from '../components/ActorItem.vue'
+
 
 export default {
   name : "MovieDetail",
@@ -56,6 +59,7 @@ export default {
       poster_img_url : null,
       back_img_url : null,
       trailer_url : null,
+      flag : false
     }
   },
   methods : {
@@ -68,6 +72,7 @@ export default {
           this.movie = response.data
           this.poster_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.poster_path
           this.back_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.backdrop_path
+          this.changeFlag()
         })
         .catch((error)=>{
           console.log(error)
@@ -82,18 +87,22 @@ export default {
           "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMWNmYWRjNTI2NjkwNzcxNDQ1YzU4YWY1NWVjMWU3ZCIsInN1YiI6IjYzZDMxODA2ZTcyZmU4MDBlOWU2YTU1YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QX0Tk_RtXEBQcwdsCVO__ZPTgJGmOBjTRlf2yPdXDUU"
         }
       })
-        .then((response)=>{
-          for (let info of response.data.results){
-            if (info.type == "Trailer"){
-              this.trailer_url = `https://www.youtube.com/embed/${info.key}`
-              break
-            }
+      .then((response)=>{
+        for (let info of response.data.results){
+          if (info.type == "Trailer"){
+            this.trailer_url = `https://www.youtube.com/embed/${info.key}`
+            break
           }
-        })
+        }
+      })
+    },
+    changeFlag() {
+      this.flag = true
     }
   },
-  created(){
-    this.getMovieDetail(),
+  created() {
+    this.flag = true
+    this.getMovieDetail()
     this.getTrailerURL()
   }
 }
@@ -130,4 +139,15 @@ img {
   width: 400px;
   height: 500px;
 }
+
+.animation {
+  animation-name: bounce-in;
+  animation-duration: 1s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(5);
+  }
+}
+
 </style>
