@@ -1,47 +1,38 @@
 <template>
   <div v-if="this.profile">
     <h1>{{ profile?.username }}님의 프로필</h1>
-    <div id="follow">    
-      <p>팔로우 : {{ profile?.followings }}</p>
-      <p>팔로워 : {{ profile?.followers_count }}</p>
+    <div class="list-group">    
+      <div class="list-group-item d-flex justify-content-around align-itmes-center">
+        <p>팔로우 : {{ profile?.followings }}</p>
+        <p>팔로워 : {{ profile?.followers_count }}</p>
+      </div>
     </div>
     <h2>작성한 게시물</h2>
     <ol class="list-group" v-if="profile.articles">
-      <li v-for="article in profile.articles" :key="article.id" class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div>{{ article.id }}</div>
-          <div class="fw-bold">{{ article.title }}</div>
-        </div>
-        <span class="badge bg-primary rounded-pill fs-5">&#128077;{{ article.like_count }}</span>
-      </li>
+      <ArticleListItem 
+      v-for="article in profile.articles" :key="article.id" :article="article"
+      />
     </ol>
     <h2>작성한 댓글</h2>
 
     <div class="list-group" v-if="profile.comments">
       <div v-for="comment in profile.comments" :key="comment.id" class="list-group-item">
         <div class="d-flex w-100 justify-content-between align-itmes-center">
-          <div class="mb-1">{{ comment.id }} </div>
+          <span class="mb-1">NO. {{ comment.id }} </span>
           <div class="mb-1">{{ comment.content }} </div>
           <div @click="goToArticle(comment.article.id)" style="cursor:pointer;">| 게시물 | {{ comment.article.title }}</div>
         </div>
-        
       </div>
     </div>
 
-    <h2>좋아요 누른 댓글</h2>
+    <h2>좋아요 누른 게시물</h2>
 
-    <div v-if="profile.like_articles">
-      <div v-for="like_article in profile.like_articles" :key="like_article.id" id="like_article">
-        <p>{{ like_article.id }} </p>
-        <p>{{ like_article.title }} </p>
-        <p>| 작성자 | {{ like_article.username }}</p>
-      </div>
-    </div>
+    <ol class="list-group" v-if="profile.like_articles">
+      <ArticleListItem 
+      v-for="article in profile.like_articles" :key="article.id" :article="article"
+      />
+    </ol>
 
-    <h2>팔로워 리스트</h2>
-    <div>
-      {{profile?.followerlist}}
-    </div>
     <button class="w-btn w-btn-indigo" type="button" v-if="checkMyPage()" @click="passwordChange">비밀번호변경</button>
 
     <div v-if="!checkMyPage()">
@@ -54,11 +45,15 @@
 
 <script>
 import axios from 'axios'
+import ArticleListItem from '@/components/ArticleListItem'
 
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: "ProFile",
+  components: {
+    ArticleListItem,
+  },
   data() {
     return {
       profile: null,
