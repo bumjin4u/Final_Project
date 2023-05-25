@@ -1,17 +1,24 @@
 <template>
   <div>
-    <div class="comment" v-if="!updateMode">
-      <p>{{ content }}</p>
-      <div class="btnBox" v-if="flag">
-        <a @click="changeMode">수정</a>
-        <a @click="deleteCommentItem">삭제</a>
+    <li v-if="!updateMode" class="list-group-item d-flex justify-content-between align-items-start comment">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{ comment.username }}</div>
+        {{content}}
       </div>
-    </div>
-    <div v-else>
-      <input type="text" v-model="content">
-      <button @click="updateComment">수정하기</button>
-    </div>
-    <hr>
+      <div class="btnBox" v-if="flag">
+        <a @click="changeMode">수정 |</a>
+        <a @click="deleteCommentItem">| 삭제</a>
+      </div>
+    </li>
+    <li v-else class="list-group-item d-flex justify-content-between align-items-start comment">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{ comment.username }}</div>
+        <div class="input-group">
+          <input type="text" class="form-control" aria-describedby="button-addon2" v-model="content">
+          <button class="btn btn-warning" type="button" id="button-addon2" @click="updateComment">수정</button>
+        </div>  
+      </div>
+    </li>
   </div>
 </template>
 
@@ -39,6 +46,7 @@ export default {
   },
   created(){
     this.checkUser()
+    console.log(this.comment)
   },
   methods: {
     deleteCommentItem() {
@@ -105,6 +113,28 @@ export default {
   background-color : white;
   color: black;
   justify-content: space-between;
+  border-bottom: 1px solid;
+  border-radius: 5px;
+  text-align: start;
+}
+.btnBox {
+  display: flex;
   align-items: center;
+  color: gray;
+}
+.username {
+  font-size: 20px;
+  color: rgb(30, 174, 231);
+}
+.content {
+  font-size: 18px;
+  color: rgb(30, 174, 231);
+}
+.time {
+  font-size : 12px;
+  color: gray;
+}
+.m3 {
+  margin-left: 10px;
 }
 </style>

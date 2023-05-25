@@ -1,8 +1,10 @@
 <template>
   <div class="container article-list">
-    <ArticleListItem 
-    v-for="article in articles" :key="article.id" :article="article"
-    />
+    <ul class="list-group">
+      <ArticleListItem 
+      v-for="article in articles" :key="article.id" :article="article"
+      />
+    </ul>
   </div>
 </template>
 

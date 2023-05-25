@@ -2,26 +2,34 @@
 
 <template>
   <div>
-    <h1>게시글 작성</h1>
-    <form @submit.prevent="createArticle">
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
-      <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
-      <SearchEngine
+    <div class="d-flex justify-content-between">
+      <span></span>
+      <h1><b>게시글 작성</b></h1>
+      <button type="button" class="btn btn-success m-2" @click="createArticle">작성하기</button>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">제목</span>
+      <input type="text" class="form-control" aria-describedby="basic-addon1" v-model="title">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">내용</span>
+      <textarea class="form-control" aria-label="With textarea" v-model="content" rows="10"></textarea>
+    </div>
+    <h3>태그할 영화</h3>
+    <SearchEngine
       @getMovies="saveMovies"
       dynamic-props="movie"
+    />
+    <div v-if="movies" class="row">
+      <MovieItem
+      v-for="movie in movies" :key="movie.id"
+      @selectMovie="saveSelectedMovie"
+      :movie="movie"
+      :class="{'Selected':selected(movie), 'none':!selected(movie)}"
       />
-      <div v-if="movies" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 d-flex justify-content-start g-1">
-        <MovieItem
-        v-for="movie in movies" :key="movie.id"
-        @selectMovie="saveSelectedMovie"
-        :movie="movie"
-        :class="{'Selected':selected(movie), 'none':!selected(movie)}"
-        />
-      </div>
-      <input type="submit" id="submit">
-    </form>
+    </div>
   </div>
 </template>
 

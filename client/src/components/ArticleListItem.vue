@@ -1,12 +1,9 @@
 <template>
-  <div class="d-flex justify-content-between align-items-center">
-    <h5>No. {{ article.id }}</h5>
-    <h5 class="underline" @click="goToDetail" style="cursor:pointer;">{{ article.title }}</h5>
-    <div>
-      <h5 class="underline" @click="goProfile" style="cursor:pointer;">{{ article.username }}</h5>
-      <h5>&#128077; {{ article.like_count }}</h5>
-    </div>
-  </div>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>No. {{ article.id }}</span>
+    <span class="underline" @click="goToDetail">{{ article.title }}</span>
+    <span class="badge bg-primary rounded-pill fs-5">&#128077; {{ article.like_count }}</span>
+  </li>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
   <div v-if="profile_img_url" @click="goToDetail" class="col" style="cursor:pointer;">
     <img :src="profile_img_url" alt="">
-      <p>{{actor.name}}</p>
+    <h3 class="pants">{{actor.name}}</h3>
   </div>
 </template>
 
@@ -35,6 +35,6 @@ export default {
 img {
   width: 300px;
   height: 400px;
-  border-radius: 5%;
+  border-radius: 10px;
 }
 </style>

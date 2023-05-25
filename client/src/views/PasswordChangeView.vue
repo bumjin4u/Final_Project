@@ -47,7 +47,7 @@ export default {
         },
       })
       .then(() => {
-        this.$router.push({name: 'LoginView'})
+        this.$router.push({name: 'MovieView'})
       })
       .catch((err) => {
         console.log(err)

@@ -1,12 +1,9 @@
 <template>
   <div>
-    <div>
-      <h1>댓글 작성</h1>
-      <form @submit.prevent="createComment">
-        <label>내용 : </label>
-        <input cols="30" rows="10" v-model="content">
-        <input type="submit" id="submit">
-      </form>
+    <h1>댓글 작성</h1>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="댓글을 입력해주세요" aria-label="댓글을 입력해주세요" aria-describedby="button-addon2" v-model="content">
+      <button class="btn btn-success" type="button" id="button-addon2" @click="createComment">작성</button>
     </div>
     <h3>Comment List</h3>
     <CommentListItem 
@@ -86,5 +83,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  
+</style>
 
 

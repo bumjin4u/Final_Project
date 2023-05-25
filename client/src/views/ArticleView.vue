@@ -2,6 +2,7 @@
   <div>
     <h1>커뮤니티</h1>
     <a class="btn btn-outline-light" @click="is_Logined">글 작성</a>
+    <br><br>
     <ArticleList />
     <hr>
   </div>

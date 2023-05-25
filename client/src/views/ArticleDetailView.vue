@@ -24,12 +24,14 @@
     </div>
     
     <div v-if="flag">
-      <p @click="ArticleLike" style="cursor:pointer;">&#10084;</p>
-      <span>{{ article?.like_count }}</span>
+      <button class="btn btn-primary" type="button" @click="ArticleLike">좋아요 {{ article?.like_count }}</button>
+      <!-- <p @click="ArticleLike" style="cursor:pointer;">&#10084;</p>
+      <span>{{ article?.like_count }}</span> -->
     </div>
     <div v-else>
-      <p @click="ArticleLike" style="cursor:pointer;">&#9825;</p>
-      <span>{{ article?.like_count }}</span>
+      <button class="btn btn-secondary" type="button" @click="ArticleLike">좋아요 {{ article?.like_count }}</button>
+      <!-- <p @click="ArticleLike" style="cursor:pointer;">&#9825;</p>
+      <span>{{ article?.like_count }}</span> -->
     </div>
     <CommentList 
     :article="article_id"

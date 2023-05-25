@@ -1,15 +1,15 @@
 <template>
   <div id="loginForm">
     <h1 class="title">로그인</h1>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"><b>아이디</b></span>
-      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" v-model="username">
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" v-model="username">
+      <label for="floatingInput">아이디</label>
     </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1"><b>비밀번호</b></span>
-      <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" v-model="password">
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" v-model="password">
+      <label for="floatingPassword">비밀번호</label>
     </div>
-    <button class="btn btn-primary" type="button" @click="login">Login</button>
+    <button type="button" class="btn btn-primary" @click="login">로그인</button>
   </div>
 </template>
 
@@ -32,7 +32,6 @@ export default {
       }
 
       this.$store.dispatch('login', payload)
-
     }
   },
   created(){
@@ -48,13 +47,10 @@ export default {
   justify-content: center;
   margin-top: 100px;
 }
-#basic-addon1{
-  width: 90px;
-}
-.input-group{
-  width: 500px;
-}
 .title  {
   font-weight: bolder;
+}
+.btn {
+  margin-top: 10px;
 }
 </style>

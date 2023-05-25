@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="input-group mb-3">
-      <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">{{target}}</button>
+      <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">{{target}}</button>
       <ul class="dropdown-menu">
         <li class="dropdown-item" @click="setTarget('영화')">영화</li>
         <li v-if="dynamicProps!=='movie'" class="dropdown-item" @click="setTarget('배우')">배우</li>
       </ul>
       <input type="text" class="form-control" aria-label="Text input with dropdown button" v-model="query">
-      <button class="btn btn-outline-light" type="button" @click.prevent="search">검색</button>
+      <button class="btn btn-success" type="button" @click.prevent="search">검색</button>
     </div>
   </div>
   
