@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header @click="[reload, playsound()]">
+    <header @click="[reload, playsound()]" style="cursor:pointer;">
       <img src="@/assets/ldd6.png" alt="">
       <h1 class="title">{{this.$store.state.now}} 좋아~</h1>
     </header>
@@ -72,6 +72,8 @@ export default {
   background-attachment:fixed;
   color: white;
   min-height: 1500px;
+  min-width: 1500px;
+  background-repeat: no-repeat;
 }
 
 .homegrid {
