@@ -37,8 +37,8 @@ export default new Vuex.Store({
     CHANGE_NOW(state,status){
       state.now = status
     },
-    CHANGE_DANGER(state, danger){
-      state.danger = danger
+    CHANGE_DANGER(state){
+      state.danger = !state.danger
     }
   },
   actions: {
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         const account = JSON.parse(res.config.data)
         context.commit('SAVE_USERNAME', account.username)
 
-        router.push({ name: 'ArticleView' })
+        router.push({ name: 'MovieView' })
         
        })
        .catch(() => {
@@ -85,8 +85,8 @@ export default new Vuex.Store({
     changenow(context,status){
       context.commit('CHANGE_NOW',status)
     },
-    changedanger(context, danger){
-      context.commit('CHANGE_DANGER',danger)
+    changedanger(context){
+      context.commit('CHANGE_DANGER')
     }
   },
   modules: {

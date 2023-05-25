@@ -1,10 +1,7 @@
 <template>
   <div>
     <nav class="m10">
-      <router-link class="tags" :to="{ name : 'SleepMovieView' }">#보다 주무세요</router-link><br>
-      <router-link class="tags" :to="{ name : 'BMovieView' }">#B급영화</router-link><br>
-      <router-link class="tags" :to="{ name : 'TaglineView' }">#미안하다이거보여주려고어그로끌었다</router-link><br>
-      <router-link class="tags" :to="{ name : 'AnimationView' }">#이세계로...</router-link>
+      <router-link class="tags" :to="{ name : 'TaglineView' }"><h1>영화 맞추기</h1></router-link><br>
     </nav>
     <router-view/>
   </div>
@@ -14,7 +11,7 @@
 export default {
   name : "RecommentdationView",
   created(){
-    this.$store.dispatch('changenow','추천')
+    this.$store.dispatch('changenow','게임')
   }
 }
 </script>

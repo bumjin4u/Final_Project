@@ -14,7 +14,7 @@ export default {
   methods : {
     goToDetail : function(){
       const currentPath = this.$router.history.current.path
-      if (currentPath === '/articles/create' || currentPath.endsWith('update')){
+      if (currentPath === '/articles/create' || currentPath.endsWith('update') || currentPath.endsWith('add')) {
         this.$emit('selectMovie',this.movie)
       }
       else{

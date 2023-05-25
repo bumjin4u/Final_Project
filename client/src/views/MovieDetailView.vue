@@ -1,6 +1,6 @@
 <template>
   
-  <div v-if="movie" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
+  <div v-if="movie" class="body" :style="{'background-image': `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) ,url(${back_img_url})`}">
       <h1 v-if="movie.tagline" class="title animation">"{{movie.tagline}}"</h1>
 
       <div>
@@ -106,7 +106,6 @@ export default {
           return
         }
       }
-      this.$store.dispatch('changedanger',false)
     },
   },
   created() {
@@ -169,5 +168,10 @@ export default {
     opacity: 1;
     transform: none;
   }
+}
+.body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>

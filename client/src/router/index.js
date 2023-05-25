@@ -13,14 +13,20 @@ import ActorDetailView from '@/views/ActorDetailView'
 import ProfileView from '@/views/ProfileView'
 import ArticleUpdateView from '@/views/ArticleUpdateView'
 import PasswordChangeView from '@/views/PasswordChangeView'
-import BMovieView from '@/views/BMovieView'
-import SleepMovieView from '@/views/SleepMovieView'
 import RecommendationView from '@/views/RecommendationView'
 import TaglineView from '@/views/TaglineView'
-import AnimationView from '@/views/AnimationView'
+import TagView from '@/views/TagView'
+import TagDetail from '@/views/TagDetail'
+import AddMovieToTag from '@/views/AddMovieToTag'
+import HomeView from '@/views/HomeView'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'HomeView',
+    component: HomeView
+  },
   {
     path: '/articles',
     name: 'ArticleView',
@@ -52,7 +58,7 @@ const routes = [
     component: SearchView
   },
   {
-    path: '/',
+    path: '/movies',
     name: 'MovieView',
     component: MovieView
   },
@@ -92,24 +98,24 @@ const routes = [
     component: RecommendationView
   },
   {
-    path: '/recommendation/B',
-    name: 'BMovieView',
-    component: BMovieView
-  },
-  {
-    path: '/recommendation/sleep',
-    name: 'SleepMovieView',
-    component: SleepMovieView
-  },
-  {
     path: '/recommendation/tagline',
     name: 'TaglineView',
     component: TaglineView
   },
   {
-    path: '/recommendation/isekai',
-    name: 'AnimationView',
-    component: AnimationView
+    path: '/tags',
+    name: 'TagView',
+    component: TagView
+  },
+  {
+    path: '/tags/:tag_id',
+    name: 'TagDetail',
+    component: TagDetail
+  },
+  {
+    path: '/tags/:tag_id/add',
+    name: 'AddMovieToTag',
+    component: AddMovieToTag
   },
 ]
 

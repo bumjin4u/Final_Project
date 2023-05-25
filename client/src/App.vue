@@ -1,22 +1,28 @@
 <template>
-  <div id="app" :class="{'dangermode': dangermode, 'safemode': !dangermode}">
+  <div id="app" :class="{'dangermode': danger, 'safemode': !danger}">
     <header @click="[reload, playsound()]" style="cursor:pointer;">
-      <img v-if="!dangermode" class="fadein" src="@/assets/ldd6.png" alt="" @click="reload">
-      <img v-if="dangermode" class="fadein" src="@/assets/plankton.png" alt="" @click="reload">
+      <img v-if="!danger" class="fadein" src="@/assets/ldd6.png" alt="" @click="reload">
+      <img v-if="danger" class="fadein" src="@/assets/dong.png" alt="" @click="reload">
       <h1 class="title">{{this.$store.state.now}} 좋아~</h1>
     </header>
     <div class="homegrid">
-      <nav class="navBar">
-        <router-link class="btn navItem" :to="{ name: 'MovieView'}">영화</router-link>
-        <router-link class="btn navItem" :to="{ name: 'ActorView'}">배우</router-link>
-        <router-link class="btn navItem" :to="{ name: 'ArticleView'}">게시물</router-link>
-        <router-link class="btn navItem" :to="{ name: 'SearchView'}">검색</router-link>
-        <router-link class="btn navItem" :to="{ name: 'RecommentdationView'}">추천</router-link>
-        <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
-        <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
-        <router-link class="btn navItem" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">내 정보</router-link>
-        <a class="btn navItem" v-if="isLogin" @click="logout">로그아웃</a>
-      </nav>
+      <div>
+        <div class="form-check form-switch mode">
+          <input class="form-check-input switchBox" type="checkbox" role="switch" id="flexSwitchCheckDefault" v-model="danger" @click="changeDanger">
+        </div>
+        <nav class="navBar">
+          <router-link class="btn navItem" :to="{ name: 'MovieView'}">영화</router-link>
+          <router-link class="btn navItem" :to="{ name: 'ActorView'}">배우</router-link>
+          <router-link class="btn navItem" :to="{ name: 'ArticleView'}">게시물</router-link>
+          <router-link class="btn navItem" :to="{ name: 'SearchView'}">검색</router-link>
+          <router-link class="btn navItem" :to="{ name: 'RecommentdationView'}">게임</router-link>
+          <router-link class="btn navItem" :to="{ name: 'TagView'}">이거어때</router-link>
+          <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'SignUpView'}">회원가입</router-link>
+          <router-link class="btn navItem" v-if="!isLogin" :to="{ name: 'LoginView'}">로그인</router-link>
+          <router-link class="btn navItem" v-if="isLogin" :to="{ name: 'ProfileView', params : { username : username}}">내 정보</router-link>
+          <a class="btn navItem" v-if="isLogin" @click="logout">로그아웃</a>
+        </nav>
+      </div>
       <div class="view">
         <router-view/>
       </div>
@@ -30,6 +36,11 @@ import sound from '@/assets/Monday.mp3'
 
 export default {
   name: 'App',
+  data : function(){
+    return {
+      danger : this.$store.state.danger
+    }
+  },
   computed: {
     isLogin: function() {
       return this.$store.getters.isLogin
@@ -39,7 +50,7 @@ export default {
     },
     dangermode : function(){
       return this.$store.state.danger
-    }
+    },
   },
   methods: {
     logout() {
@@ -60,6 +71,9 @@ export default {
         audio.play()
         audio.muted = false
       }
+    },
+    changeDanger(){
+      this.$store.dispatch('changedanger')
     }
   }
 }
@@ -77,6 +91,7 @@ export default {
   min-height: 1500px;
   min-width: 1500px;
   background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .dangermode {
   background-image : url('@/assets/rockbottm.jpg')
@@ -99,7 +114,7 @@ export default {
   border: 2px solid white;
   border-radius: 10px;
   height: 400px;
-  margin-top : 120px;
+  margin-top : 10px;
   position: sticky;
   top: 100px;
   background-color: white;
@@ -143,7 +158,14 @@ img {
 .fadein:hover {
   animation-play-state: paused;
 }
-
+.switchBox {
+  width: 50px;
+  height: 20px;
+}
+.mode {
+  position: sticky;
+  top: 65px;
+}
 @keyframes fadein{
   0% {
     overflow: hidden;

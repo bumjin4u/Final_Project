@@ -1,16 +1,12 @@
 <template>
   <div class="taglines">
-    <h1>미안하다 이거 보여주려고 어그로 끌었다...</h1>
+    <h1>STOP & CLICK</h1>
     <div v-if="taglines" class="rotate" >
       <div class="fadein">
         <TagLine
         v-for="tagline in taglines" :key="tagline.id"
         :tagline="tagline"/>
       </div>
-      <!-- <TagLine
-      v-for="tagline in taglines" :key="tagline.id" class="fadein" 
-      :tagline="tagline" -->
-      />
     </div>
   </div>
 
