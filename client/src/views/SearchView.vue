@@ -1,7 +1,5 @@
 <template>
   <div class="body">
-    <div @click="SearchActor">배우</div>
-    <div @click="SearchMovie">영화</div>
     <SearchEngine 
     :dynamic-props="dynamicProps"
     @getActors="saveActors"
@@ -42,12 +40,6 @@ export default {
     }
   },
   methods: {
-    SearchActor() {
-      this.dynamicProps = "actor"
-    },
-    SearchMovie() {
-      this.dynamicProps = "movie"
-    },
     saveActors(actors){
       this.movies = null
       this.actors = actors

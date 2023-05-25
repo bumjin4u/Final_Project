@@ -1,8 +1,11 @@
 <template>
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <span>No. {{ article.id }}</span>
-    <span class="underline" @click="goToDetail">{{ article.title }}</span>
-    <span class="badge bg-primary rounded-pill fs-5">&#128077; {{ article.like_count }}</span>
+    <span class="underline" @click="goToDetail" style="cursor:pointer;">{{ article.title }}</span>
+    <div>
+      <span @click="goProfile" style="cursor:pointer;">{{ article.username }} </span>
+      <span class="badge bg-primary rounded-pill fs-5">&#128077; {{ article.like_count }}</span>
+    </div>
   </li>
 </template>
 
@@ -16,6 +19,9 @@ export default {
   methods: {
     goProfile() {
       if (this.$store.getters.isLogin){
+        if (this.$route.name === 'ProfileView'){
+          return
+        }
         this.$router.push({name: 'ProfileView', params : {username : this.article.username}})
       }
       else{

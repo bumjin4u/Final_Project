@@ -1,23 +1,33 @@
 <template>
   <div>
-    <h1>Article Update</h1>
-    <label for="">제목 : </label>
-    <input type="text" v-model="title"><br>
-    <label for="">내용 : </label>
-    <input type="text" v-model="content"><br>
+    <div class="d-flex justify-content-between">
+      <span></span>
+      <h1><b>게시글 수정</b></h1>
+      <button type="button" class="btn btn-success m-2" @click="updateArticle">수정하기</button>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">제목</span>
+      <input type="text" class="form-control" aria-describedby="basic-addon1" v-model="title">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">내용</span>
+      <textarea class="form-control" aria-label="With textarea" v-model="content" rows="10"></textarea>
+    </div>
+    <h3>태그할 영화</h3>
     <SearchEngine
-    @getMovies="saveMovies"
-    dynamic-props="movie"
+      @getMovies="saveMovies"
+      dynamic-props="movie"
     />
-    <div v-if="movies">
+    <div v-if="movies" class="row">
       <MovieItem
       v-for="movie in movies" :key="movie.id"
       @selectMovie="saveSelectedMovie"
       :movie="movie"
-      :class="{'selected':selected(movie)}"
+      :class="{'Selected':selected(movie), 'none':!selected(movie)}"
       />
     </div>
-    <input type="submit" @click="updateArticle">
   </div>
 </template>
 
@@ -95,5 +105,8 @@ export default {
 <style scoped>
 .selected {
   border: 1px solid blue;
+}
+.none {
+  opacity: 0.5;
 }
 </style>

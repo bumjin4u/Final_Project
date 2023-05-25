@@ -61,16 +61,16 @@ export default {
 
 <style scoped>
 
+.rotate {
+  height: 70px;
+  overflow: hidden;
+}
 .fadein {
   font-size: medium;
   position: relative;
   overflow: hidden;
   animation: fadein 45s cubic-bezier(0.0, 0.0, 0.0 ,0.0);
   animation-iteration-count: infinite;
-}
-.rotate {
-  height: 70px;
-  overflow: hidden;
 }
 .fadein:hover {
   animation-play-state: paused;

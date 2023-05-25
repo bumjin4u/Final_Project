@@ -36,6 +36,9 @@ export default new Vuex.Store({
     },
     CHANGE_NOW(state,status){
       state.now = status
+    },
+    CHANGE_DANGER(state, danger){
+      state.danger = danger
     }
   },
   actions: {
@@ -45,16 +48,15 @@ export default new Vuex.Store({
         url: `${API_URL}/accounts/signup/`,
         data : {...payload},
       })
-       .then((res) => {
-        context.commit('SAVE_TOKEN', res.data.key)
-        const account = JSON.parse(res.config.data)
-        context.commit('SAVE_USERNAME', account.username)
-        router.push({ name: 'ArticleView' })
-        
-       })
-       .catch(() => {
-        alert('이미 존재하는 아이디거나 비밀번호가 서로 다릅니다.')
-       })
+        .then((res) => {
+          context.commit('SAVE_TOKEN', res.data.key)
+          const account = JSON.parse(res.config.data)
+          context.commit('SAVE_USERNAME', account.username)
+          router.push({ name: 'MovieView' })
+        })
+        .catch(() => {
+          alert('이미 존재하는 아이디 입니다.')
+        })
     },
     login(context, payload) {
       axios({
@@ -82,6 +84,9 @@ export default new Vuex.Store({
     },
     changenow(context,status){
       context.commit('CHANGE_NOW',status)
+    },
+    changedanger(context, danger){
+      context.commit('CHANGE_DANGER',danger)
     }
   },
   modules: {

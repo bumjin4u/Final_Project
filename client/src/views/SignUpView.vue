@@ -13,7 +13,7 @@
       <span class="input-group-text" id="basic-addon1">비밀번호 확인</span>
       <input type="password" class="form-control" placeholder="비밀번호 확인" v-model="password2" @input="checkForm">
     </div>
-    <span>{{errorMsg}}</span>
+    <span class="Error">{{errorMsg}}</span>
     <button class="btn btn-success" type="button" @click="signup">회원가입</button>
   </div>
 </template>
@@ -33,6 +33,10 @@ export default {
   },
   methods: {
     signup() {
+      if (!this.checkForm()){
+        alert('아래 규칙을 지켜주세요.')
+        return
+      }
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
@@ -45,17 +49,18 @@ export default {
     checkForm(){
       if (!this.username){
         this.errorMsg = "아이디를 입력해주세요."
-        return
+        return false
       }
       if (!this.password1 || !this.password2){
         this.errorMsg = "비밀번호를 입력해주세요."
-        return
+        return false
       }
       if (this.password1 !== this.password2){
         this.errorMsg = "비밀번호가 서로 다릅니다."
-        return
+        return false
       }
-      this.errorMsg = "성공"
+      this.errorMsg = ""
+      return true
     },
   },
   created(){
@@ -79,5 +84,9 @@ export default {
 }
 .title  {
   font-weight: bolder;
+}
+.Error {
+  color: red;
+  font-size: 20px;
 }
 </style>

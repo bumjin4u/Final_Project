@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h1>보다가 자버리는 그런 st...</h1>
+    <h1>롱 ~~~~~ 타임 노 씨....</h1>
     <MovieItem
     v-for="movie in movies" :key="movie.id"
     :movie="movie"

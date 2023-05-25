@@ -2,12 +2,12 @@
   <div>
     <li v-if="!updateMode" class="list-group-item d-flex justify-content-between align-items-start comment">
       <div class="ms-2 me-auto">
-        <div class="fw-bold">{{ comment.username }}</div>
+        <div class="username">{{ comment.username }}</div>
         {{content}}
       </div>
       <div class="btnBox" v-if="flag">
-        <a @click="changeMode">수정 |</a>
-        <a @click="deleteCommentItem">| 삭제</a>
+        <a @click="changeMode" style="cursor:pointer;">수정 |</a>
+        <a @click="deleteCommentItem" style="cursor:pointer;">| 삭제</a>
       </div>
     </li>
     <li v-else class="list-group-item d-flex justify-content-between align-items-start comment">

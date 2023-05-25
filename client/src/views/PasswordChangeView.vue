@@ -1,16 +1,16 @@
 <template>
   <div>
-     <h1>PasswordChange Page</h1>
-    <form @submit.prevent="passwordchange">
-
-      <label for="new_password1"> password : </label>
-      <input type="password" id="new_password1" v-model="new_password1"><br>
-
-      <label for="new_password2"> password confirmation : </label>
-      <input type="password" id="new_password2" v-model="new_password2">
-      
-      <input type="submit" value="PasswordChange">
-    </form>
+    <h1>PasswordChange Page</h1>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">변경할 비밀번호</span>
+      <input type="password" class="form-control" placeholder="비밀번호" aria-describedby="basic-addon1" v-model="new_password1" @input="checkForm">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">변경할 비밀번호 확인</span>
+      <input type="password" class="form-control" placeholder="비밀번호 확인" aria-describedby="basic-addon1" v-model="new_password2" @input="checkForm">
+    </div>
+    <span class="error">{{ errorMsg }}</span>
+    <button class="btn btn-success" type="button" @click="passwordchange">변경하기</button>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
     return {
       new_password1: null,
       new_password2: null,
+      errorMsg : null,
     }
   },
   computed: {
@@ -33,6 +34,10 @@ export default {
   },
   methods: {
     passwordchange() {
+      if (!this.checkForm()){
+        alert("아래 규칙을 지켜주세요.")
+        return
+      }
       const new_password1 = this.new_password1
       const new_password2 = this.new_password2
 
@@ -47,11 +52,23 @@ export default {
         },
       })
       .then(() => {
-        this.$router.push({name: 'MovieView'})
+        this.$router.push('/')
       })
       .catch((err) => {
         console.log(err)
       })
+    },
+    checkForm(){
+      if (!this.new_password1 || !this.new_password2){
+        this.errorMsg = "비밀번호를 입력해주세요."
+        return false
+      }
+      else if (this.new_password1 !== this.new_password2){
+        this.errorMsg = "비밀번호가 서로 다릅니다."
+        return false
+      }
+      this.errorMsg = null
+      return true
     }
   },
   created(){
@@ -60,6 +77,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.error {
+  color: red;
+  font-size: 20px;
+}
 </style>

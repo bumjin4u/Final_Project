@@ -18,9 +18,9 @@
       <p>추천수 : {{ article?.like_count }}</p>
     </div>
     <div class="btnBox" v-if="Author">
-      <button v-if="Author" @click="goToArticleUpdate">수정</button>
+      <button class="btn btn-warning spacespace" v-if="Author" @click="goToArticleUpdate">수정</button>
       <br>
-      <button v-if="Author" @click="deleteArticleDetail">삭제</button>
+      <button class="btn btn-danger" v-if="Author" @click="deleteArticleDetail">삭제</button>
     </div>
     
     <div v-if="flag">
@@ -182,5 +182,9 @@ section {
 .btnBox {
   display: flex;
   justify-content: end;
+}
+
+.spacespace {
+  margin-right: 3px;
 }
 </style>
