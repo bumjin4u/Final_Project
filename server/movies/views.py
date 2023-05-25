@@ -1,5 +1,5 @@
 # Create your views here.
-from .models import Movie, Genre
+from .models import Movie
 from django.shortcuts import get_list_or_404, get_object_or_404
 from .serializers import MovieListSerializer, MovieSerializer, TaglineListSerializer
 from rest_framework.response import Response

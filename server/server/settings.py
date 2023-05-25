@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'articles',
     'movies',
     'actors',
+    'tags',
     'rest_framework',
 
     'corsheaders',
