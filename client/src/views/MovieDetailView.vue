@@ -66,7 +66,6 @@ export default {
           this.poster_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.poster_path
           this.back_img_url = 'https://image.tmdb.org/t/p/original' + '/' + this.movie.backdrop_path
           this.$store.dispatch('changenow',this.movie.title)
-          this.changeDanger()
         })
         .catch((error)=>{
           console.log(error)
@@ -89,23 +88,6 @@ export default {
           }
         }
       })
-    },
-    changeDanger() {
-      const bads = [80, 27, 9648, 53, 10752, 28]
-      const badwords = ['엄마','처제','젊은','욕망','신혼','서비스','이혼여행','새오빠','새누나','새언니','새색시','여사장','지스팟','스팟','스와핑','음란','과외','장모','동창회','섹스','이모','고모','외숙모', '형수', '여동생','오르가즘','며느리','젖','친구부부','외출 3','룸싸롱','언니','안마방','여대생','뜨거운 이웃','비뇨기과','여의사','맛 1','맛 2','맛 2016', '여직원의 맛']
-      for (let badword of badwords){
-        if (this.movie.title.includes(badword)){
-          this.$store.dispatch('changedanger',true)
-          return
-        }
-      }
-
-      for (let genre of this.movie.genres){
-        if (bads.includes(genre.id)){
-          this.$store.dispatch('changedanger',true)
-          return
-        }
-      }
     },
   },
   created() {

@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1>Home Sweet Home</h1>
-    <div>
-      <h1>{{ampm}} : {{hour}} : {{minutes}} : {{seconds}}</h1>
+    <div class="time">
+      <h1 class="clock">{{ampm}} : {{hour}} : {{minutes}} : {{seconds}}</h1>
     </div>
   </div>
 </template>
@@ -34,7 +33,7 @@ export default {
         else {
           this.ampm = 'AM'
         }
-        if (this.hour < 12){
+        if (this.hour < 10){
           this.hour = '0'+ this.hour
         }
         if (minutes < 10){
@@ -59,6 +58,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.time {
+  margin-top: 100px;
+}
+.clock {
+  font-size: 100px;
+}
 </style>
